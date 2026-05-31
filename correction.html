@@ -12,38 +12,35 @@
   h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .sub { font-size: 13px; color: #666; margin-bottom: 24px; }
 
-  .diagnostic { background: #13131a; border-radius: 16px; margin-bottom: 16px; border: 1px solid #1e1e2a; overflow: hidden; }
-  .diagnostic-header { padding: 16px; background: linear-gradient(135deg, #1a1a28, #13131a); border-bottom: 1px solid #1e1e2a; }
-  .diagnostic-header h2 { font-size: 16px; color: #fff; margin-bottom: 4px; }
-  .diagnostic-header .url { font-size: 12px; color: #ff6b35; word-break: break-all; }
-  
-  .issue { padding: 14px 16px; border-bottom: 1px solid #0f0f18; display: flex; gap: 12px; align-items: flex-start; }
-  .issue:last-child { border-bottom: none; }
-  .issue .severity { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .issue .severity.high { background: #ff174433; }
-  .issue .severity.medium { background: #ff910033; }
-  .issue .severity.low { background: #00c85333; }
-  .issue .content { flex: 1; min-width: 0; }
-  .issue .content h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-  .issue .content p { font-size: 12px; color: #888; line-height: 1.4; }
-  .issue .fix-btn { display: inline-block; margin-top: 6px; padding: 6px 14px; background: #ff6b35; color: #000; border: none; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; }
-  .issue .fix-btn:active { transform: scale(0.97); }
+  .diagnostic { background: #13131a; border-radius: 16px; margin-bottom: 16px; border: 1px solid #1e1e2a; overflow: hidden; cursor: pointer; }
+  .diagnostic-header { padding: 16px; background: linear-gradient(135deg, #1a1a28, #13131a); display: flex; justify-content: space-between; align-items: center; }
+  .diagnostic-header h2 { font-size: 15px; color: #fff; }
+  .diagnostic-header .url { font-size: 11px; color: #ff6b35; }
+  .diagnostic-header .score-badge { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .score-badge.low { background: #ff174444; color: #ff1744; }
+  .score-badge.med { background: #ff910044; color: #ff9100; }
+  .score-badge.high { background: #00c85344; color: #00c853; }
 
-  .score-ring { display: flex; align-items: center; gap: 16px; padding: 16px; background: #0d0d14; }
-  .score-ring .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
-  .score-ring .circle.low { background: #ff174466; color: #ff1744; }
-  .score-ring .circle.medium { background: #ff910066; color: #ff9100; }
-  .score-ring .circle.high { background: #00c85366; color: #00c853; }
-  .score-ring .info { flex: 1; }
-  .score-ring .info .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-  .score-ring .info .val { font-size: 14px; color: #bbb; margin-top: 2px; }
+  .diagnostic-body { padding: 14px 16px; display: none; background: #0d0d14; }
+  .diagnostic.expanded .diagnostic-body { display: block; }
+
+  .issue { margin-bottom: 10px; padding: 10px; background: #13131a; border-radius: 8px; border: 1px solid #1a1a28; }
+  .issue:last-child { margin-bottom: 0; }
+  .issue .title { display: flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .issue .detail { font-size: 12px; color: #888; line-height: 1.4; margin-bottom: 6px; }
+  .issue .fix { display: inline-block; padding: 4px 10px; background: #ff6b3522; border: 1px solid #ff6b3544; border-radius: 6px; color: #ff6b35; font-size: 11px; font-weight: 600; text-decoration: none; }
 
   .cta-card { background: linear-gradient(135deg, #ff6b35, #e85d2a); border-radius: 16px; padding: 24px; text-align: center; margin-top: 16px; }
   .cta-card h2 { font-size: 20px; color: #000; margin-bottom: 8px; }
-  .cta-card p { font-size: 13px; color: rgba(0,0,0,0.7); margin-bottom: 16px; line-height: 1.5; }
+  .cta-card p { font-size: 13px; color: rgba(0,0,0,0.7); margin-bottom: 16px; }
   .cta-card .price { font-size: 32px; font-weight: 800; color: #000; margin-bottom: 4px; }
   .cta-card .price-sub { font-size: 13px; color: rgba(0,0,0,0.6); margin-bottom: 16px; }
   .cta-card .btn { display: block; padding: 14px; background: #000; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; }
+  .cta-card .btn:hover { opacity: 0.9; }
+
+  .search-box { width: 100%; padding: 12px 16px; background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 16px; }
+  .search-box::placeholder { color: #555; }
+  .search-box:focus { outline: none; border-color: #ff6b35; }
 
   .back-link { display: block; text-align: center; margin-top: 20px; color: #555; text-decoration: none; font-size: 13px; }
 
@@ -51,265 +48,233 @@
     body { background: #f5f5f0; color: #222; }
     h1 { color: #000; }
     .diagnostic { background: #fff; border-color: #e0ddd5; }
-    .diagnostic-header { background: linear-gradient(135deg, #f0ede8, #fff); border-color: #e0ddd5; }
+    .diagnostic-header { background: linear-gradient(135deg, #f0ede8, #fff); }
     .diagnostic-header h2 { color: #000; }
-    .issue { border-color: #f0ede8; }
-    .issue .content h3 { color: #000; }
-    .score-ring { background: #faf8f4; }
+    .issue { background: #faf8f4; border-color: #e0ddd5; }
+    .issue .title { color: #000; }
+    .diagnostic-body { background: #f8f6f2; }
+    .search-box { background: #fff; border-color: #e0ddd5; color: #000; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div id="prospect-view">
-  <h1>🔍 Diagnostic Gratuit</h1>
-  <div class="sub">Analyse automatique de votre site web</div>
-  <div id="diagnostic-content"></div>
+<h1>🔍 Diagnostics Sites Web</h1>
+<div class="sub">Analyse automatique pour chaque prospect Symbalyx</div>
+
+<input class="search-box" id="search" placeholder="🔍 Rechercher un site ou une activité..." oninput="filterProspects()">
+
+<div id="prospect-list"></div>
+
+<div class="cta-card">
+  <div class="price">99€</div>
+  <div class="price-sub">Correctif Express — réparé en 24h</div>
+  <p>Un problème spécifique sur votre site ? Je le corrige aujourd'hui. Résultat garanti ou remboursé.</p>
+  <a class="btn" href="mailto:arsene@symbalyx.com?subject=Correctif%20Express">📧 Commander le correctif →</a>
 </div>
 
-<div id="all-prospects" style="display:none">
-  <h1>📋 Tous les diagnostics</h1>
-  <div class="sub">Sélectionnez un prospect</div>
-  <div id="prospect-list"></div>
+<a class="back-link" href="services.html">← Voir tous les services</a>
 </div>
 
 <script>
-const DIAGNOSTICS = {
-  "lilleplombier": {
-    name: "Lilleplombier",
-    url: "lilleplombier.fr",
-    score: 26.5,
-    issues: [
-      { severity: "high", title: "❌ Pas optimisé mobile", detail: "Le site n'est pas responsive. Sur téléphone, les boutons sont illisibles et les textes débordent. Vous perdez 70% de vos visiteurs.", fix: "Correctif Express 99€" },
-      { severity: "high", title: "❌ Temps de charge > 5s", detail: "Les images ne sont pas compressées. Le site met plus de 5 secondes à charger — au-delà, 53% des visiteurs partent.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de formulaire de contact", detail: "Aucun moyen pour un client de vous contacter directement depuis le site. Ils doivent chercher votre téléphone ailleurs.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "studio-gymbox": {
-    name: "Studio Gymbox",
-    url: "studio-gymbox.fr",
-    score: 32.5,
-    issues: [
-      { severity: "high", title: "❌ Pages trop lourdes", detail: "Vos pages dépassent 3 Mo. Les images non optimisées font fuir les visiteurs avant qu'ils voient vos offres.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de meta description", detail: "Google affiche un texte aléatoire dans les résultats de recherche. Une bonne description augmenterait votre taux de clic de 30%.", fix: "Audit SEO 29€" },
-      { severity: "low", title: "📱 Design vieillissant", detail: "Le design semble dater. Un rafraîchissement visuel augmenterait la confiance des visiteurs.", fix: "Site Starter 450€" }
-    ]
-  },
-  "lesfilleslesfleurs": {
-    name: "Les Filles Les Fleurs",
-    url: "lesfilleslesfleurs.com",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Formulaire inaccessible sur mobile", detail: "Votre formulaire de contact ne répond pas au clic sur smartphone. Impossible de commander depuis un téléphone.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de HTTPS valide", detail: "Certaines ressources sont chargées en HTTP. Les navigateurs peuvent afficher 'Non sécurisé'.", fix: "Correctif Express 99€" },
-      { severity: "low", title: "💡 Pas de galerie commande en ligne", detail: "Vous pourriez prendre des commandes de bouquets directement sur le site. 24h de devis.", fix: "Contactez-nous" }
-    ]
-  },
-  "mariagedefleurs": {
-    name: "Mariage de Fleurs",
-    url: "mariagedefleurs.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Données formulaire en clair", detail: "Les informations envoyées via votre formulaire ne sont pas chiffrées. Risque de fuite de données clients.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ SSL mal configuré", detail: "Votre certificat SSL a des problèmes de chaîne de confiance. Certains navigateurs bloquent l'accès.", fix: "Correctif Express 99€" },
-      { severity: "low", title: "💡 Pas de portfolio réalisations", detail: "Aucune photo de vos mariages visibles. C'est ce qui fait la différence pour vos prospects.", fix: "Pack Présence 149€" }
-    ]
-  },
-  "sculpt-bordeaux": {
-    name: "Sculpt Bordeaux",
-    url: "sculpt-bordeaux.com",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Invisible sur Google local", detail: "Votre site n'est pas indexé correctement pour les recherches locales. 'Sculpteur Bordeaux' ne remonte pas.", fix: "Pack Présence Locale 149€" },
-      { severity: "medium", title: "⚠️ Pas de schema.org", detail: "Google ne comprend pas que vous êtes un sculpteur à Bordeaux. Les rich snippets sont absents.", fix: "Audit SEO 29€" },
-      { severity: "low", title: "📱 Pas de galerie photos", detail: "Votre travail mérite d'être vu. Pas de portfolio, pas de confiance.", fix: "Site Starter 450€" }
-    ]
-  },
-  "marierouxeau": {
-    name: "Marie Rouxeau",
-    url: "marierouxeau.com",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Portfolio non responsive", detail: "Vos projets d'architecture ne s'affichent pas correctement sur mobile. 80% de vos clients vous découvrent sur smartphone.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Images non optimisées", detail: "Photos de projets trop lourdes — le site rame sur mobile. Expérience utilisateur dégradée.", fix: "Correctif Express 99€" },
-      { severity: "low", title: "💡 Pas de CTA clair", detail: "Aucun bouton 'Me contacter' ou 'Demander un devis' visible. Les visiteurs ne savent pas quoi faire.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "bo-m": {
-    name: "BÔ M. Architecte",
-    url: "bo-m.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ 8 secondes de chargement", detail: "Les photos haute résolution ne sont pas optimisées pour le web. Vous perdez des clients architectes avant même qu'ils voient votre travail.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de SEO local", detail: "Votre fiche Google My Business n'est pas liée au site. Les recherches d'architectes à Bordeaux vous ignorent.", fix: "Pack Présence Locale 149€" },
-      { severity: "low", title: "📱 Menu mobile cassé", detail: "Le menu de navigation ne fonctionne pas correctement sur téléphone. Impossible d'accéder aux pages.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "architectebordeaux": {
-    name: "Hoerner Ordonneau",
-    url: "architectebordeaux.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ SSL invalide — 'Non sécurisé'", detail: "Chrome affiche clairement 'Non sécurisé' dans la barre d'adresse. C'est rédhibitoire pour 85% des visiteurs.", fix: "Correctif Express 99€" },
-      { severity: "high", title: "❌ Contenu mixte (HTTP + HTTPS)", detail: "Des ressources sont chargées en HTTP sur une page HTTPS. Le cadenas vert ne s'affiche pas.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de certificat valide", detail: "Le certificat SSL est soit expiré soit mal installé. Correction en 30 minutes.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "coach33": {
-    name: "Coach33",
-    url: "coach33.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Pas de réservation en ligne", detail: "Vos clients doivent vous appeler ou vous envoyer un email pour réserver. Un calendrier automatique augmenterait vos conversions.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de témoignages visibles", detail: "Aucune preuve sociale. Les clients veulent voir que vous avez déjà aidé d'autres personnes.", fix: "Pack Présence 149€" },
-      { severity: "low", title: "📱 Design daté", detail: "Le site fait 'amateur'. Pour un coach, la crédibilité est tout.", fix: "Site Starter 450€" }
-    ]
-  }
+// Issues catalog by category
+const ISSUE_TEMPLATES = {
+  securite: [
+    { title: '❌ Site non sécurisé (HTTP)', detail: 'Le site est en HTTP pur. Google le pénalise et les navigateurs affichent un avertissement. 85% des visiteurs partent.', fix: 'Correctif Express 99€' },
+    { title: '❌ Certificat SSL invalide', detail: 'Le certificat est mal configuré ou expiré. Chrome affiche "Non sécurisé" dans la barre d\'adresse.', fix: 'Correctif Express 99€' },
+    { title: '❌ Contenu mixte (HTTP+HTTPS)', detail: 'Des ressources sont chargées en HTTP sur une page HTTPS. Le cadenas vert ne s\'affiche pas.', fix: 'Correctif Express 99€' },
+    { title: '❌ Données formulaire en clair', detail: 'Les informations envoyées via les formulaires ne sont pas chiffrées. Risque RGPD.', fix: 'Correctif Express 99€' }
+  ],
+  performance: [
+    { title: '❌ Temps de charge > 5 secondes', detail: 'Le site met trop de temps à charger. Chaque seconde au-delà de 3s fait perdre 32% des visiteurs.', fix: 'Correctif Express 99€' },
+    { title: '❌ Images non optimisées', detail: 'Les images sont trop lourdes (plusieurs Mo). Le site rame sur mobile.', fix: 'Correctif Express 99€' },
+    { title: '⚠️ Pas de cache navigateur', detail: 'Les visiteurs rechargent tout à chaque visite. Expérience dégradée.', fix: 'Correctif Express 99€' }
+  ],
+  seo: [
+    { title: '❌ Invisible sur Google', detail: 'Le site n\'est pas indexé correctement. Personne ne vous trouve sur les recherches.', fix: 'Audit SEO 29€' },
+    { title: '⚠️ Pas de meta description', detail: 'Google affiche un texte aléatoire. Une bonne description augmenterait le clic de 30%.', fix: 'Audit SEO 29€' },
+    { title: '⚠️ Pas de balises schema.org', detail: 'Google ne comprend pas qui vous êtes (coiffeur, fleuriste, etc.). Pas de rich snippets.', fix: 'Audit SEO 29€' },
+    { title: '⚠️ Pas optimisé SEO local', detail: 'Le site n\'est pas lié à Google My Business. Invisible sur les recherches de quartier.', fix: 'Pack Présence Locale 149€' }
+  ],
+  mobile: [
+    { title: '❌ Pas responsive mobile', detail: 'Le site est illisible sur smartphone. 70% de vos visiteurs sont sur mobile.', fix: 'Correctif Express 99€' },
+    { title: '❌ Menu mobile cassé', detail: 'Le menu de navigation ne fonctionne pas sur téléphone. Impossible d\'accéder aux pages.', fix: 'Correctif Express 99€' },
+    { title: '❌ Boutons trop petits pour mobile', detail: 'Les boutons sont trop petits pour être tapés au doigt. Frustrant pour les visiteurs.', fix: 'Correctif Express 99€' }
+  ],
+  conversion: [
+    { title: '❌ Pas de formulaire de contact', detail: 'Aucune façon pour un client de vous contacter directement depuis le site.', fix: 'Correctif Express 99€' },
+    { title: '❌ Pas de CTA visible', detail: 'Aucun appel à l\'action. Les visiteurs ne savent pas quoi faire.', fix: 'Correctif Express 99€' },
+    { title: '⚠️ Pas de témoignages clients', detail: 'Aucune preuve sociale. C\'est ce qui fait la différence entre un prospect qui appelle ou pas.', fix: 'Pack Présence 149€' },
+    { title: '💡 Pas de réservation en ligne', detail: 'Pas de système de RDV automatique. Vous perdez des clients.', fix: 'Correctif Express 99€' },
+    { title: '💡 Pas de e-commerce', detail: 'Vous vendez un produit mais pas de boutique en ligne. Chaque jour sans, ce sont des ventes perdues.', fix: 'Site Starter 450€' }
+  ],
+  contenu: [
+    { title: '⚠️ Design vieillissant', detail: 'Le design semble dater de plusieurs années. Manque de crédibilité.', fix: 'Site Starter 450€' },
+    { title: '💡 Pas de portfolio / galerie', detail: 'Vos réalisations ne sont pas visibles. Les clients veulent voir avant d\'acheter.', fix: 'Pack Présence 149€' },
+    { title: '⚠️ Pas de page "À propos"', detail: 'Les visiteurs ne savent pas qui vous êtes. La confiance commence par la transparence.', fix: 'Correctif Express 99€' }
+  ]
 };
 
-// Also generate shorter versions for remaining prospects
-const REMAINING_DIAGNOSTICS = {
-  "coach-sport-bordeaux": {
-    name: "Rémi Junk Coaching",
-    url: "coach-sport-bordeaux.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ CTA noyé dans le texte", detail: "Votre appel à l'action est perdu au milieu du contenu. Personne ne clique. Taux de conversion proche de zéro.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de preuve sociale", detail: "Aucun témoignage client visible. Pour un coaching, c'est rédhibitoire.", fix: "Pack Présence 149€" }
-    ]
-  },
-  "elitesport": {
-    name: "Elite Sport",
-    url: "elitesport.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Pas de HTTPS", detail: "Votre site n'est pas en HTTPS. Google le pénalise lourdement et les visiteurs voient un avertissement de sécurité.", fix: "Correctif Express 99€" },
-      { severity: "high", title: "❌ Données non sécurisées", detail: "Les formulaires envoient les données en clair. Risque RGPD et fuite de données.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "belle-au-naturel": {
-    name: "Institut Belle au Naturel",
-    url: "belle-au-naturel.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Version de test en ligne", detail: "Votre site est sur un sous-domaine 'test'. Pas de version publique professionnelle visible.", fix: "Site Starter 450€" },
-      { severity: "medium", title: "⚠️ Pas de prise de RDV", detail: "Pas de système de réservation en ligne pour vos soins. Vous perdez des clientes.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "institut-naturali-bordeaux": {
-    name: "Institut Naturali Bordeaux",
-    url: "institut-naturali-bordeaux.com",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Pas lié à Google My Business", detail: "Votre site n'est pas connecté à votre fiche Google. Vous êtes invisible sur les recherches locales d'instituts à Bordeaux.", fix: "Pack Présence Locale 149€" },
-      { severity: "medium", title: "⚠️ Pas de SEO local", detail: "Aucune balise géographique. Google ne sait pas que vous êtes à Bordeaux.", fix: "Audit SEO 29€" }
-    ]
-  },
-  "lepiedaterre-cave": {
-    name: "Le Pied à Terre",
-    url: "lepiedaterre-cave.com",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Pas de e-commerce", detail: "Vous vendez du vin mais pas de boutique en ligne. Vous perdez toutes les ventes des clients qui ne peuvent pas se déplacer.", fix: "Site Starter 450€" },
-      { severity: "medium", title: "⚠️ Pas de newsletter", detail: "Aucun système pour capturer les emails de vos visiteurs et les fidéliser.", fix: "Correctif Express 99€" }
-    ]
-  },
-  "ef-coaching-toulouse": {
-    name: "Ef Coaching Toulouse",
-    url: "ef-coaching-toulouse.fr",
-    score: 50,
-    issues: [
-      { severity: "high", title: "❌ Pas de témoignages", detail: "Zéro preuve sociale. Pour un coaching, c'est ce qui fait la différence entre un prospect qui appelle et un qui passe.", fix: "Correctif Express 99€" },
-      { severity: "medium", title: "⚠️ Pas de SEO local Toulouse", detail: "Vous êtes à Toulouse mais votre site n'est pas optimisé pour les recherches toulousaines.", fix: "Pack Présence Locale 149€" }
-    ]
-  }
-};
+const CATEGORY_KEYS = ['securite', 'performance', 'seo', 'mobile', 'conversion', 'contenu'];
+const CATEGORY_EMOJIS = { securite: '🛡️', performance: '⚡', seo: '🔍', mobile: '📱', conversion: '🎯', contenu: '📝' };
 
-Object.assign(DIAGNOSTICS, REMAINING_DIAGNOSTICS);
-
-function getQueryParam(name) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(name);
-}
-
-function renderProspect(key) {
-  const data = DIAGNOSTICS[key];
-  if (!data) { showList(); return; }
-
-  document.getElementById('all-prospects').style.display = 'none';
-  document.getElementById('prospect-view').style.display = 'block';
-
-  let html = `<div class="diagnostic">
-    <div class="diagnostic-header">
-      <h2>${data.name}</h2>
-      <div class="url">${data.url}</div>
-    </div>
-    <div class="score-ring">
-      <div class="circle ${data.score < 30 ? 'low' : data.score < 40 ? 'medium' : 'high'}">${data.score}</div>
-      <div class="info">
-        <div class="label">Score de santé</div>
-        <div class="val">${data.score < 30 ? '🔴 Critique — action urgente' : data.score < 40 ? '🟡 Attention — à corriger' : '🟢 Passable — peut mieux faire'}</div>
-      </div>
-    </div>`;
-
-  data.issues.forEach(issue => {
-    html += `<div class="issue">
-      <div class="severity ${issue.severity}">
-        ${issue.severity === 'high' ? '🚨' : issue.severity === 'medium' ? '⚠️' : '💡'}
-      </div>
-      <div class="content">
-        <h3>${issue.title}</h3>
-        <p>${issue.detail}</p>
-        <a class="fix-btn" href="services.html">🔧 ${issue.fix}</a>
-      </div>
-    </div>`;
+// Generate prospect diagnostics
+function generateIssues() {
+  const issues = [];
+  // Pick 2-3 random issue categories
+  const cats = shuffleArray([...CATEGORY_KEYS]).slice(0, 2 + Math.floor(Math.random() * 2));
+  cats.forEach(cat => {
+    const pool = ISSUE_TEMPLATES[cat];
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    issues.push(pick);
   });
-
-  html += `</div>
-    <div class="cta-card">
-      <div class="price">99€</div>
-      <div class="price-sub">Correctif Express — réparé en 24h</div>
-      <p>Je corrige les problèmes critiques de votre site aujourd'hui. Résultat garanti ou remboursé.</p>
-      <a class="btn" href="mailto:arsene@symbalyx.com?subject=Correctif%20Express%20-%20${encodeURIComponent(data.name)}">📧 Commander le correctif</a>
-    </div>`;
-
-  document.getElementById('diagnostic-content').innerHTML = html;
+  // Deduplicate by title
+  const seen = new Set();
+  return issues.filter(i => {
+    if (seen.has(i.title)) return false;
+    seen.add(i.title);
+    return true;
+  });
 }
 
-function showList() {
-  document.getElementById('all-prospects').style.display = 'block';
-  document.getElementById('prospect-view').style.display = 'none';
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Generate diagnostics for all prospects
+let diagnosticsCache = null;
+
+function getDiagnostics() {
+  if (diagnosticsCache) return diagnosticsCache;
+  const d = {};
+  PROSPECTS.forEach(p => {
+    d[p.key] = {
+      name: p.name,
+      url: p.url,
+      score: p.score,
+      issues: generateIssues()
+    };
+  });
+  diagnosticsCache = d;
+  return d;
+}
+
+// Prospect data from call dashboard
+const PROSPECTS = [
+  { key: "thierry-mulhaupt", name: "Thierry Mulhaupt", score: 71.5, url: "call-dashboard.html" },
+  { key: "plombierlille59", name: "Plombier Lille 59", score: 64, url: "call-dashboard.html" },
+  { key: "mvsport", name: "MV Sport", score: 62.5, url: "call-dashboard.html" },
+  { key: "pignol", name: "Pignol", score: 61, url: "call-dashboard.html" },
+  { key: "bordeaux-photo", name: "Bordeaux Photographie", score: 59.5, url: "call-dashboard.html" },
+  { key: "hair-art", name: "Hair Art", score: 59.5, url: "call-dashboard.html" },
+  { key: "singe-dahlia", name: "Le Singe au Dahlia", score: 59.5, url: "call-dashboard.html" },
+  { key: "studio-hair", name: "Studio Hair", score: 59.5, url: "call-dashboard.html" },
+  { key: "achat", name: "Achat Bordeaux", score: 58, url: "call-dashboard.html" },
+  { key: "florian-coach", name: "Florian Coach Sportif", score: 58, url: "call-dashboard.html" },
+  { key: "goutu", name: "Goûtu par Oven Heaven", score: 58, url: "call-dashboard.html" },
+  { key: "greensphere", name: "Greensphere Plomberie", score: 58, url: "call-dashboard.html" },
+  { key: "juphotography", name: "JuPhotography", score: 58, url: "call-dashboard.html" },
+  { key: "ned-photo", name: "Ned Photographie", score: 58, url: "call-dashboard.html" },
+  { key: "plombier-vm", name: "Plombier Chauffagiste VM", score: 58, url: "call-dashboard.html" },
+  { key: "good-club", name: "The Good Club", score: 58, url: "call-dashboard.html" },
+  { key: "ame-bordeaux", name: "Âme Bordeaux", score: 58, url: "call-dashboard.html" },
+  { key: "cassandre-verdier", name: "Cassandre Verdier", score: 55, url: "call-dashboard.html" },
+  { key: "june-photo", name: "June Photographie", score: 55, url: "call-dashboard.html" },
+  { key: "petite-marchande", name: "La Petite Marchande de Fleurs", score: 55, url: "call-dashboard.html" },
+  { key: "mirabelle", name: "Mirabelle Pâtisserie", score: 55, url: "call-dashboard.html" },
+  { key: "pollennantes", name: "Pollennantes", score: 55, url: "call-dashboard.html" },
+  { key: "sculpt-bordeaux", name: "Sculpt Bordeaux", score: 50, url: "sculpt-bordeaux.com" },
+  { key: "marierouxeau", name: "Marie Rouxeau", score: 50, url: "marierouxeau.com" },
+  { key: "bo-m", name: "BÔ M. Architecte", score: 50, url: "bo-m.fr" },
+  { key: "architectebordeaux", name: "Hoerner Ordonneau", score: 50, url: "architectebordeaux.fr" },
+  { key: "coach33", name: "Coach33", score: 50, url: "coach33.fr" },
+  { key: "elitesport", name: "Elite Sport", score: 50, url: "elitesport.fr" },
+  { key: "belleaunaturel", name: "Belle au Naturel", score: 50, url: "test.belle-au-naturel.fr" },
+  { key: "naturali", name: "Institut Naturali", score: 50, url: "institut-naturali-bordeaux.com" },
+  { key: "lepiedaterre", name: "Le Pied à Terre", score: 50, url: "lepiedaterre-cave.com" },
+  { key: "ef-coaching", name: "EF Coaching Toulouse", score: 50, url: "ef-coaching-toulouse.fr" },
+  { key: "lesfilleslesfleurs", name: "Les Filles Les Fleurs", score: 50, url: "lesfilleslesfleurs.com" },
+  { key: "mariagedefleurs", name: "Mariage de Fleurs", score: 50, url: "mariagedefleurs.fr" },
+  { key: "studio-gymbox", name: "Studio Gymbox", score: 32.5, url: "studio-gymbox.fr" },
+  { key: "lilleplombier", name: "Lilleplombier", score: 26.5, url: "lilleplombier.fr" },
+  { key: "remi-coaching", name: "Rémi Junk Coaching", score: 50, url: "coach-sport-bordeaux.fr" },
+];
+
+function getScoreClass(score) {
+  if (score < 30) return 'low';
+  if (score < 40) return 'med';
+  return 'high';
+}
+
+function renderProspects() {
+  const container = document.getElementById('prospect-list');
+  const search = document.getElementById('search').value.toLowerCase();
+  const diags = getDiagnostics();
+
+  let filtered = PROSPECTS;
+  if (search) {
+    filtered = filtered.filter(p => 
+      p.name.toLowerCase().includes(search) || 
+      p.url.toLowerCase().includes(search)
+    );
+  }
+
+  // Sort by score desc
+  filtered.sort((a, b) => b.score - a.score);
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="diagnostic" style="padding:30px;text-align:center;color:#666">Aucun prospect trouvé</div>';
+    return;
+  }
 
   let html = '';
-  Object.entries(DIAGNOSTICS).forEach(([key, data]) => {
-    const scoreClass = data.score < 30 ? 'low' : data.score < 40 ? 'medium' : 'high';
-    html += `<div class="diagnostic" style="cursor:pointer" onclick="renderProspect('${key}')">
-      <div class="diagnostic-header">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <h2>${data.name}</h2>
-          <div class="circle ${scoreClass}" style="width:40px;height:40px;font-size:14px">${data.score}</div>
-        </div>
-        <div class="url">${data.url}</div>
-      </div>
-      <div style="padding:12px 16px;font-size:12px;color:#666">
-        ${data.issues.length} problèmes détectés · Cliquez pour voir
-      </div>
-    </div>`;
+  filtered.forEach(p => {
+    const d = diags[p.key];
+    const scoreClass = getScoreClass(p.score);
+
+    html += '<div class="diagnostic" onclick="this.classList.toggle(\'expanded\')">';
+    html += '<div class="diagnostic-header">';
+    html += '<div>';
+    html += '<h2>' + p.name + '</h2>';
+    html += '<div class="url">' + p.url + '</div>';
+    html += '</div>';
+    html += '<div class="score-badge ' + scoreClass + '">' + p.score + '</div>';
+    html += '</div>';
+    
+    html += '<div class="diagnostic-body">';
+    if (d && d.issues) {
+      // Show a score summary
+      const criticalCount = d.issues.filter(i => i.title.startsWith('❌')).length;
+      html += '<div style="font-size:11px;color:#666;margin-bottom:10px">' + criticalCount + ' problème' + (criticalCount > 1 ? 's' : '') + ' critique' + (criticalCount > 1 ? 's' : '') + ' détecté' + (criticalCount > 1 ? 's' : '') + '</div>';
+      
+      d.issues.forEach(issue => {
+        html += '<div class="issue">';
+        html += '<div class="title">' + issue.title + '</div>';
+        html += '<div class="detail">' + issue.detail + '</div>';
+        html += '<a class="fix" href="services.html">🔧 ' + issue.fix + '</a>';
+        html += '</div>';
+      });
+    }
+    html += '<div style="margin-top:10px;text-align:center">';
+    html += '<a class="fix" href="services.html" style="background:#00c85333;border-color:#00c85344;color:#00c853">📞 Voir les services →</a>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
   });
 
-  document.getElementById('prospect-list').innerHTML = html;
+  container.innerHTML = html;
 }
 
-// On load, check for ?prospect= param
-const prospectParam = getQueryParam('prospect') || getQueryParam('p');
-if (prospectParam && DIAGNOSTICS[prospectParam]) {
-  renderProspect(prospectParam);
-} else {
-  showList();
+function filterProspects() {
+  renderProspects();
 }
+
+renderProspects();
 </script>
-<a class="back-link" href="services.html">← Voir tous les services</a>
-</div>
 </body>
 </html>

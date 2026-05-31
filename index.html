@@ -1,116 +1,311 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Guide SEO Local Gratuit — Symbalyx Bordeaux</title>
-  <meta name="description" content="Téléchargez le guide SEO local gratuit pour artisans et commerçants à Bordeaux. 7 étapes pour apparaître dans Google gratuitement.">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;line-height:1.6}
-    .wrap{max-width:640px;margin:0 auto;padding:40px 24px}
-    .badge{display:inline-block;background:#2E1219;color:#F7F3EE;padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:600;margin-bottom:20px}
-    h1{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:800;line-height:1.2;margin-bottom:12px;color:#2E1219;letter-spacing:-.02em}
-    .sub{font-size:1.1rem;color:#756A62;margin-bottom:32px}
-    .hero-img{background:#EFE7DB;border-radius:24px;padding:48px;text-align:center;margin-bottom:32px}
-    .hero-img .big{font-size:3.5rem}
-    .benefits{display:grid;gap:12px;margin-bottom:32px}
-    .benefit{display:flex;gap:12px;align-items:flex-start;padding:16px;background:#FFFDF8;border-radius:16px;border:1px solid rgba(33,26,23,.07)}
-    .benefit .icon{font-size:1.5rem;flex-shrink:0;width:40px;text-align:center}
-    .benefit h3{font-size:1rem;font-weight:700;margin-bottom:4px}
-    .benefit p{font-size:.9rem;color:#756A62}
-    .form-card{background:#FFFDF8;border:1px solid rgba(33,26,23,.11);border-radius:24px;padding:32px;text-align:center;margin-bottom:32px}
-    .form-card h2{font-size:1.3rem;margin-bottom:8px}
-    .form-card p{color:#756A62;font-size:.9rem;margin-bottom:20px}
-    .form-group{margin-bottom:12px;text-align:left}
-    label{font-size:.85rem;font-weight:600;display:block;margin-bottom:4px}
-    input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(33,26,23,.15);font-size:1rem;background:#F7F3EE}
-    .btn{display:block;width:100%;padding:16px;background:#2E1219;color:#FFFDF8;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-top:8px}
-    .btn:hover{opacity:.9}
-    .trust{font-size:.8rem;color:#A09388;margin-top:12px}
-    .preview{margin-bottom:32px}
-    .preview h3{font-size:1.1rem;margin-bottom:12px}
-    .preview-list{display:grid;gap:8px}
-    .preview-item{display:flex;gap:10px;align-items:center;padding:10px 14px;background:#FFFDF8;border-radius:12px;border:1px solid rgba(33,26,23,.07);font-size:.9rem}
-    .preview-item .num{background:#EFE7DB;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;color:#42352E}
-    footer{text-align:center;font-size:.8rem;color:#A09388;padding:24px;border-top:1px solid rgba(33,26,23,.07)}
-    @media(max-width:480px){.wrap{padding:24px 16px}.form-card{padding:24px 16px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Symbalyx — Panneau de Contrôle</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 20px 16px; }
+
+  .hero { text-align: center; padding: 30px 0 20px; }
+  .hero h1 { font-size: 28px; font-weight: 800; color: #ff6b35; letter-spacing: -1px; }
+  .hero .sub { font-size: 14px; color: #666; margin-top: 4px; }
+  .hero .tagline { font-size: 13px; color: #888; margin-top: 8px; background: #13131a; border-radius: 100px; padding: 6px 16px; display: inline-block; border: 1px solid #1e1e2a; }
+
+  .quick-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 20px; }
+  .stat-box { background: #13131a; border-radius: 12px; padding: 12px 8px; text-align: center; border: 1px solid #1e1e2a; }
+  .stat-box .num { font-size: 22px; font-weight: 800; color: #fff; }
+  .stat-box .label { font-size: 9px; color: #666; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-box.gold { border-color: #ff6b3544; }
+  .stat-box.gold .num { color: #ff6b35; }
+  .stat-box.green { border-color: #00c85344; }
+  .stat-box.green .num { color: #00c853; }
+
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: 14px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid #1e1e2a; }
+
+  .card { background: #13131a; border-radius: 14px; padding: 16px; border: 1px solid #1e1e2a; margin-bottom: 8px; }
+  .card.gold { border-color: #ff6b3544; background: linear-gradient(135deg, #1a1a2e, #13131a); }
+  .card.green { border-color: #00c85344; }
+  .card.clickable { cursor: pointer; transition: all 0.15s; }
+  .card.clickable:active { transform: scale(0.98); opacity: 0.8; }
+  .card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .card p { font-size: 12px; color: #888; line-height: 1.5; }
+  .card .badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; }
+  .badge.green { background: #00c85322; color: #00c853; }
+  .badge.gold { background: #ff6b3522; color: #ff6b35; }
+  .badge.blue { background: #2979ff22; color: #2979ff; }
+  .badge.gray { background: #333; color: #888; }
+
+  .card .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .card .link-item { background: #0d0d14; border: 1px solid #1a1a28; border-radius: 8px; padding: 10px; text-align: center; text-decoration: none; display: block; }
+  .card .link-item .emoji { font-size: 18px; }
+  .card .link-item .txt { font-size: 11px; color: #bbb; font-weight: 500; margin-top: 2px; }
+
+  .item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #0f0f18; }
+  .item:last-child { border-bottom: none; }
+  .item .icon { flex-shrink: 0; font-size: 16px; width: 24px; text-align: center; }
+  .item .content { flex: 1; min-width: 0; }
+  .item .content .title { font-size: 13px; font-weight: 500; color: #ddd; }
+  .item .content .desc { font-size: 11px; color: #666; }
+  .item .status { flex-shrink: 0; font-size: 11px; }
+  .status.on { color: #00c853; }
+  .status.off { color: #ff1744; }
+  .status.warn { color: #ff9100; }
+
+  .divider { height: 1px; background: #1e1e2a; margin: 16px 0; }
+
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #1e1e2a; }
+  .tl-item { position: relative; padding-bottom: 14px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before { content: ''; position: absolute; left: -16px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #ff6b35; border: 2px solid #0a0a0f; }
+  .tl-item .tl-date { font-size: 10px; color: #555; }
+  .tl-item .tl-title { font-size: 13px; font-weight: 500; color: #ddd; }
+  .tl-item .tl-desc { font-size: 11px; color: #666; margin-top: 2px; }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f5f0; color: #222; }
+    .section-title { color: #000; border-color: #e0ddd5; }
+    .card { background: #fff; border-color: #e0ddd5; }
+    .card h3 { color: #000; }
+    .card p { color: #666; }
+    .card.gold { background: linear-gradient(135deg, #fff3e0, #fff); }
+    .card.green { border-color: #00c85344; background: #f0faf0; }
+    .card .link-item { background: #f8f8f4; border-color: #e0ddd5; }
+    .card .link-item .txt { color: #555; }
+    .item .content .title { color: #222; }
+    .stat-box { background: #fff; border-color: #e0ddd5; }
+    .stat-box .num { color: #000; }
+    .hero .tagline { background: #fff; border-color: #e0ddd5; color: #555; }
+    .item { border-color: #eee; }
+    .timeline::before { background: #e0ddd5; }
+    .tl-item::before { border-color: #f5f5f0; }
+  }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="badge">📘 Gratuit</div>
-    <h1>Le Guide du SEO Local pour les Artisans Bordelais</h1>
-    <p class="sub">7 étapes simples pour apparaître dans Google quand vos clients vous cherchent — sans payer de pub.</p>
-    
-    <div class="hero-img">
-      <div class="big">📈</div>
-      <p style="font-size:.95rem;color:#42352E;font-weight:500">Téléchargeable en 30 secondes</p>
-    </div>
+<div class="wrap">
 
-    <div class="benefits">
-      <div class="benefit">
-        <div class="icon">🎯</div>
-        <div><h3>Apparaître dans Google Maps</h3><p>La fiche Google My Business qui fait la différence entre une vitrine vide et des clients tous les jours.</p></div>
-      </div>
-      <div class="benefit">
-        <div class="icon">📋</div>
-        <div><h3>Checklist 30 minutes</h3><p>Des actions concrètes que vous pouvez faire ce soir, pas un plan sur 6 mois.</p></div>
-      </div>
-      <div class="benefit">
-        <div class="icon">🔍</div>
-        <div><h3>Les vrais secrets des commerçants visibles</h3><p>Citations NAP, avis clients, contenu local — ce que les agences ne vous disent pas.</p></div>
-      </div>
-      <div class="benefit">
-        <div class="icon">🤝</div>
-        <div><h3>Audit offert à la fin</h3><p>On audite votre présence en ligne gratuitement. Pas d'engagement, pas de vente forcée.</p></div>
-      </div>
-    </div>
+<div class="hero">
+  <h1>⚡ SYMBALYX</h1>
+  <div class="sub">Panneau de Contrôle — 500€</div>
+  <div class="tagline" id="date"></div>
+</div>
 
-    <div class="preview">
-      <h3>📖 Ce que vous allez apprendre</h3>
-      <div class="preview-list">
-        <div class="preview-item"><span class="num">1</span> Pourquoi le SEO local est votre meilleur investissement (0€)</div>
-        <div class="preview-item"><span class="num">2</span> Google My Business : la fiche qui rapporte</div>
-        <div class="preview-item"><span class="num">3</span> Les 3 signaux que Google regarde</div>
-        <div class="preview-item"><span class="num">4</span> Votre site web comme outil SEO</div>
-        <div class="preview-item"><span class="num">5</span> Les annuaires locaux qui comptent vraiment</div>
-        <div class="preview-item"><span class="num">6</span> Les avis clients : le moteur invisible</div>
-        <div class="preview-item"><span class="num">7</span> Contenu local : le secret des commerçants visibles</div>
-      </div>
-    </div>
+<div class="quick-stats">
+  <div class="stat-box gold"><div class="num">97</div><div class="label">Téléphones</div></div>
+  <div class="stat-box"><div class="num">112</div><div class="label">Emails</div></div>
+  <div class="stat-box green"><div class="num">6</div><div class="label">Pages Web</div></div>
+  <div class="stat-box gold"><div class="num">5</div><div class="label">Services</div></div>
+</div>
 
-    <div class="form-card">
-      <h2>📥 Téléchargez le guide gratuit</h2>
-      <p>Recevez le PDF directement par email.</p>
-      <form action="mailto:arsene@symbalyx.com" method="post" enctype="text/plain">
-        <div class="form-group">
-          <label for="name">Votre prénom</label>
-          <input type="text" id="name" name="name" placeholder="Jean" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Votre email</label>
-          <input type="email" id="email" name="email" placeholder="jean@moncommerce.fr" required>
-        </div>
-        <div class="form-group">
-          <label for="activity">Votre activité</label>
-          <input type="text" id="activity" name="activity" placeholder="Coiffeur, fleuriste, restaurant...">
-        </div>
-        <button type="submit" class="btn">📩 Recevoir le guide gratuit</button>
-      </form>
-      <p class="trust">🔒 Vos données ne seront jamais partagées. 1 email, le guide, et c'est tout.</p>
-    </div>
+<!-- LANCEMENT RAPIDE -->
+<div class="section">
+  <div class="section-title">🚀 LANCEMENT RAPIDE</div>
 
-    <footer>
-      <p>© 2026 <strong>Symbalyx</strong> — Studio web à Bordeaux</p>
-      <p>2 Allée de la Chartreuse, 33000 Bordeaux</p>
-      <p style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-        <a href="services.html" style="color:#42352E;text-decoration:none;font-weight:600;padding:8px 16px;background:#EFE7DB;border-radius:100px;font-size:.85rem">🛠️ Services & Prix</a>
-        <a href="call-dashboard.html" style="color:#42352E;text-decoration:none;font-weight:600;padding:8px 16px;background:#EFE7DB;border-radius:100px;font-size:.85rem">📞 Appels</a>
-        <a href="audit.html" style="color:#42352E;text-decoration:none;font-weight:600;padding:8px 16px;background:#EFE7DB;border-radius:100px;font-size:.85rem">🔍 Audit</a>
-        <a href="correction.html" style="color:#42352E;text-decoration:none;font-weight:600;padding:8px 16px;background:#EFE7DB;border-radius:100px;font-size:.85rem">⚡ Correctif</a>
-      </p>
-    </footer>
+  <a href="briefing.html" class="card gold clickable" style="display:block;text-decoration:none">
+    <h3>🔥 Briefing 500€</h3>
+    <p>Le plan complet pour encaisser 500€ aujourd'hui : scripts, tarifs, projections. Ouvre ça en premier.</p>
+  </a>
+
+  <div class="card gold">
+    <h3>📞 Pipeline d'Appels</h3>
+    <p>80 prospects prêts à appeler avec scripts, un clic pour composer, tracking des appels.</p>
+    <div class="link-grid">
+      <a href="call-dashboard.html" class="link-item">
+        <div class="emoji">📞</div>
+        <div class="txt">Appeler</div>
+      </a>
+      <a href="correction.html" class="link-item">
+        <div class="emoji">🔍</div>
+        <div class="txt">Diagnostics</div>
+      </a>
+      <a href="services.html" class="link-item">
+        <div class="emoji">🛠️</div>
+        <div class="txt">Tarifs</div>
+      </a>
+      <a href="audit.html" class="link-item">
+        <div class="emoji">📊</div>
+        <div class="txt">Auto-Audit</div>
+      </a>
+    </div>
   </div>
+</div>
+
+<!-- PAGES DÉPLOYÉES -->
+<div class="section">
+  <div class="section-title">🌐 PAGES DÉPLOYÉES</div>
+
+  <a href="guide-seo.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>📘 Guide SEO Gratuit <span class="badge green">Live</span></h3>
+    <p>Page d'atterrissage pour capturer des prospects entrants. Lead magnet SEO local téléchargeable.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/briefing.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>🔥 Briefing 500€ <span class="badge gold">Priorité</span></h3>
+    <p>Master plan : scripts d'appel, plan d'attaque 5 étapes, tarifs, projections de revenus.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/call-dashboard.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>📞 Tableau de Bord Appels <span class="badge gold">80 prospects</span></h3>
+    <p>80 prospects triés par score, un clic pour appeler, scripts personnalisés, cases à cocher, prise de notes. Sauvegarde automatique localStorage.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/services.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>🛠️ Services & Tarifs <span class="badge green">Live</span></h3>
+    <p>5 offres : Correctif Express 99€, Audit 29€, Site Starter 450€, Maintenance 99€/mois, Pack Présence 149€.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/correction.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>🔍 Diagnostics 80 Prospects <span class="badge blue">Dynamique</span></h3>
+    <p>Analyse automatique avec failles détectées pour chaque site. Barre de recherche. Lien à envoyer par SMS pendant l'appel.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/audit.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>📊 Audit en Self-Service <span class="badge green">Live</span></h3>
+    <p>Outil d'audit libre-service pour les prospects. 29€ pour le rapport complet. Générateur de leads autonome.</p>
+  </a>
+
+  <a href="https://symbalyx.github.io/symbalyx-leads/thank-you.html" class="card clickable" style="display:block;text-decoration:none">
+    <h3>✅ Page Merci <span class="badge green">Live</span></h3>
+    <p>Page de remerciement après téléchargement du guide. Marque Symbalyx, CTA vers les services.</p>
+  </a>
+</div>
+
+<!-- INFRASTRUCTURE TECHNIQUE -->
+<div class="section">
+  <div class="section-title">⚙️ INFRASTRUCTURE TECHNIQUE</div>
+
+  <div class="card">
+    <h3>📧 Zoho Mail <span class="badge green">SMTP OK</span></h3>
+    <p>SMTP Europe (smtp.zoho.eu:465) configuré et testé. Compte arsene@symbalyx.com. Envoi toutes les 30 min.</p>
+  </div>
+
+  <div class="card">
+    <h3>⏰ Cron Jobs</h3>
+    <div class="item"><div class="icon">📤</div><div class="content"><div class="title">Envoi d'emails</div><div class="desc">1 email / 30 min · 9h-17h UTC · 15/semaine puis +5/semaine</div></div><div class="status on">● Actif</div></div>
+    <div class="item"><div class="icon">🔄</div><div class="content"><div class="title">Relances & Follow-up</div><div class="desc">Vérifie les prospects J+3/J+7/J+14, génère et envoie séquence</div></div><div class="status on">● Actif</div></div>
+    <div class="item"><div class="icon">📊</div><div class="content"><div class="title">Rapport Matinal</div><div class="desc">Résumé des envois du jour et plan d'action à 8h Paris</div></div><div class="status on">● Actif</div></div>
+  </div>
+
+  <div class="card">
+    <h3>📝 Puissance de Frappe</h3>
+    <div class="item"><div class="icon">📧</div><div class="content"><div class="title">113 Drafts d'Emails</div><div class="desc">Format PRO : objet personnalisé, RGPD complet, opt-out, séquence 4 emails</div></div></div>
+    <div class="item"><div class="icon">📞</div><div class="content"><div class="title">97 Numéros de Téléphone</div><div class="desc">Extraits et validés depuis les sites web des prospects</div></div></div>
+    <div class="item"><div class="icon">📄</div><div class="content"><div class="title">Séquence de Relance</div><div class="desc">Moteur J+3 (relance légère) / J+7 (nouvelle valeur) / J+14 (breakup)</div></div></div>
+  </div>
+
+  <div class="card">
+    <h3>🛡️ Outils Internes</h3>
+    <div class="item"><div class="icon">🔍</div><div class="content"><div class="title">security_audit.py</div><div class="desc">Scan sécurité 6 dimensions : headers, SSL, XSS, fichiers exposés, sous-domaines, fuites d'info</div></div></div>
+    <div class="item"><div class="icon">📊</div><div class="content"><div class="title">audit_report.py</div><div class="desc">Génère rapport PDF 5 pages avec scores visuels et recommandations</div></div></div>
+    <div class="item"><div class="icon">🔄</div><div class="content"><div class="title">sequence_engine.py</div><div class="desc">Moteur de séquence multi-touch avec état JSON persistant</div></div></div>
+    <div class="item"><div class="icon">📤</div><div class="content"><div class="title">send_one_email.js</div><div class="desc">Envoi Node.js/Nodemailer via Zoho SMTP avec anti-spam pacing</div></div></div>
+  </div>
+</div>
+
+<!-- PROSPECTS PIPELINE -->
+<div class="section">
+  <div class="section-title">📊 PIPELINE PROSPECTS</div>
+
+  <div class="card gold">
+    <h3>📞 97 Prospects Téléphonables</h3>
+    <p>Score moyen : 50.7/50. Répartis France entière : Bordeaux, Paris, Lyon, Marseille, Lille, Nantes, Toulouse...</p>
+  </div>
+
+  <div class="card green">
+    <h3>💰 Projection Revenus</h3>
+    <div class="item"><div class="icon">🎯</div><div class="content"><div class="title">Jour 1 (15 appels)</div><div class="desc">3 correctifs 99€ = 297€ + 1 maintenance 99€/mois</div></div></div>
+    <div class="item"><div class="icon">🔥</div><div class="content"><div class="title">Semaine 1 (80 appels)</div><div class="desc">10 correctifs 990€ + 3 maintenances 297€/mois + 1 site 450€ = 1 440€</div></div></div>
+    <div class="item"><div class="icon">♻️</div><div class="content"><div class="title">Mois 1 récurrent</div><div class="desc">5 clients × 99€ maintenance = 495€/mois sans rien faire</div></div></div>
+  </div>
+</div>
+
+<!-- TIMELINE DES RÉALISATIONS -->
+<div class="section">
+  <div class="section-title">📅 CHRONOLOGIE</div>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Phase 1</div>
+        <div class="tl-title">🔍 Analyse CRM — 28 prospects, audit sites</div>
+        <div class="tl-desc">Scoring, identification des failles, préparation des drafts</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 2</div>
+        <div class="tl-title">📧 Infrastructure Email — Zoho SMTP, 113 drafts</div>
+        <div class="tl-desc">Connexion SMTP Europe, génération masse des emails PRO, RGPD compliant</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 3</div>
+        <div class="tl-title">📤 Cron d'Envoi — 1 email/30min, anti-spam</div>
+        <div class="tl-desc">Pacing intelligent, 4-email sequence engine, relances automatiques J+3/J+7/J+14</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 4</div>
+        <div class="tl-title">🌐 Landing Pages — Guide SEO gratuit, audit tool</div>
+        <div class="tl-desc">Lead magnet, audit self-service, page remerciement. GitHub Pages déployé</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 5</div>
+        <div class="tl-title">🛠️ Outils Pro — Audit sécurité, rapport PDF</div>
+        <div class="tl-desc">Scripts internes pro : scan 6 dimensions, générateur PDF, portfolio</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 6</div>
+        <div class="tl-title">📞 Pipeline Téléphonique — 97 numéros extraits</div>
+        <div class="tl-desc">Extraction depuis 112 sites, dashboard mobile avec scripts et tracking</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Phase 7</div>
+        <div class="tl-title">🔥 Briefing 500€ — Plan d'attaque final</div>
+        <div class="tl-desc">Scripts d'appel, tarifs, projections, tout-en-un sur mobile</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS SAUVÉS -->
+<div class="section">
+  <div class="section-title">🧠 SKILLS SAUVÉS</div>
+  <div class="card">
+    <div class="item"><div class="icon">📘</div><div class="content"><div class="title">symbalyx-prospection</div><div class="desc">Campagne complète : config, RGPD, séquence 4 emails, anti-spam, sécurité, audit, facts</div></div></div>
+    <div class="item"><div class="icon">📗</div><div class="content"><div class="title">github-symbalyx-account</div><div class="desc">Procédure complète de connexion GitHub : token, SSH, Pages, dépôts</div></div></div>
+    <div class="item"><div class="icon">📕</div><div class="content"><div class="title">symbalyx-expansion-v2</div><div class="desc">Stratégie d'expansion : CRM, scoring, séquence multi-touch, inbound</div></div></div>
+  </div>
+</div>
+
+<!-- CONTENU GÉNÉRÉ -->
+<div class="section">
+  <div class="section-title">📝 CONTENU GÉNÉRÉ</div>
+  <div class="card">
+    <div class="item"><div class="icon">📧</div><div class="content"><div class="title">113 Emails Personnalisés PRO</div><div class="desc">Format V2 : objet ultra-spécifique, preuve sociale, CTA sans pression, signature Symbalyx, RGPD complet</div></div></div>
+    <div class="item"><div class="icon">📄</div><div class="content"><div class="title">10 Articles de Blog SEO</div><div class="desc">Thèmes SEO local Bordeaux : Google My Business, avis clients, citations NAP, contenu local...</div></div></div>
+    <div class="item"><div class="icon">📰</div><div class="content"><div class="title">2 Articles Medium</div><div class="desc">Prêts à publier : "Cyber sécurité pour les TPE" et "SEO local Bordeaux"</div></div></div>
+    <div class="item"><div class="icon">💼</div><div class="content"><div class="title">Portfolio Symbalyx</div><div class="desc">4 projets mock + page produit avec filtres, design sur mesure</div></div></div>
+  </div>
+</div>
+
+<!-- DERNIÈRES INSTRUCTIONS -->
+<div class="card gold" style="margin-top:8px">
+  <h3>🎯 TA MISSION</h3>
+  <p>1. Ouvre <a href="briefing.html" style="color:#ff6b35;font-weight:600">le briefing</a><br>
+  2. Active le tableau de bord <a href="call-dashboard.html" style="color:#ff6b35;font-weight:600">des appels</a><br>
+  3. Appelle les 15 premiers prospects<br>
+  4. Envoie <a href="correction.html" style="color:#ff6b35;font-weight:600">correction.html</a> par SMS pendant l'appel<br>
+  5. Propose le Correctif 99€ puis la maintenance 99€/mois</p>
+</div>
+
+<div style="text-align:center;padding:24px 0 40px;color:#444;font-size:12px">
+  Symbalyx — Construit par Hermes Agent · 31 mai 2026<br>
+arsene@symbalyx.com
+</div>
+
+</div>
+
+<script>document.getElementById('date').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });</script>
 </body>
 </html>

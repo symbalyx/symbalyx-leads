@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Symbalyx — Tableau de Bord Appels</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 16px; padding-bottom: 120px; }
+  .header { text-align: center; padding: 24px 0 16px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .header .sub { font-size: 13px; color: #888; margin-top: 4px; }
+  .stats { display: flex; gap: 8px; margin-bottom: 20px; }
+  .stat-card { flex: 1; background: #13131a; border-radius: 12px; padding: 12px; text-align: center; border: 1px solid #1e1e2a; }
+  .stat-card .num { font-size: 26px; font-weight: 700; color: #fff; }
+  .stat-card .label { font-size: 11px; color: #666; margin-top: 2px; }
+  .stat-card.done { border-color: #00c85344; }
+  .stat-card.done .num { color: #00c853; }
+
+  .prospect { background: #13131a; border-radius: 14px; margin-bottom: 12px; border: 1px solid #1e1e2a; overflow: hidden; transition: all 0.2s; }
+  .prospect.done { opacity: 0.5; border-color: #00c85333; }
+  .prospect-header { display: flex; align-items: center; padding: 14px 16px; gap: 12px; }
+  .prospect .check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: transparent; transition: all 0.2s; }
+  .prospect.done .check { background: #00c853; border-color: #00c853; color: #fff; }
+  .prospect-info { flex: 1; min-width: 0; }
+  .prospect-name { font-size: 15px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .prospect-site { font-size: 11px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .prospect-score { font-size: 13px; font-weight: 700; color: #ff6b35; flex-shrink: 0; }
+  .prospect.done .prospect-score { color: #00c853; }
+
+  .call-btn { display: flex; align-items: center; gap: 6px; background: #00c853; color: #000; font-weight: 700; font-size: 14px; padding: 8px 16px; border-radius: 10px; text-decoration: none; flex-shrink: 0; }
+  .call-btn i { font-style: normal; font-size: 16px; }
+
+  .prospect-details { padding: 0 16px 14px; display: none; }
+  .prospect.expanded .prospect-details { display: block; }
+  .script-box { background: #0d0d14; border-radius: 10px; padding: 12px; margin-top: 8px; border: 1px solid #1a1a28; }
+  .script-box .label { font-size: 10px; text-transform: uppercase; color: #666; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .script-box .text { font-size: 13px; line-height: 1.5; color: #bbb; }
+  .script-box .text em { color: #ff6b35; font-style: normal; font-weight: 500; }
+  .prospect-notes { width: 100%; margin-top: 8px; background: #0d0d14; border: 1px solid #1a1a28; border-radius: 8px; padding: 10px; color: #bbb; font-size: 13px; resize: vertical; min-height: 44px; }
+  .prospect-notes:focus { outline: none; border-color: #ff6b35; }
+  .expand-btn { background: none; border: none; color: #555; font-size: 11px; cursor: pointer; padding: 4px 0; margin-top: 4px; }
+
+  .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #0a0a0f; border-top: 1px solid #1e1e2a; padding: 12px 16px 24px; display: flex; gap: 10px; }
+  .bottom-bar button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-primary { background: #ff6b35; color: #fff; }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-secondary { background: #1e1e2a; color: #888; }
+  .btn-secondary:active { transform: scale(0.97); }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: #555; }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state h3 { font-size: 18px; color: #888; margin-bottom: 8px; }
+
+  .banner { background: linear-gradient(135deg, #1a1a2e, #0d0d1a); border: 1px solid #ff6b3533; border-radius: 14px; padding: 16px; margin-bottom: 20px; text-align: center; }
+  .banner .big { font-size: 28px; font-weight: 800; color: #ff6b35; }
+  .banner p { font-size: 12px; color: #888; margin-top: 4px; }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f5f0; color: #222; }
+    .header h1 { color: #000; }
+    .stat-card, .prospect { background: #fff; border-color: #e0ddd5; }
+    .stat-card .num { color: #000; }
+    .script-box { background: #f8f8f4; border-color: #e0ddd5; }
+    .prospect-name { color: #000; }
+    .bottom-bar { background: #f5f5f0; border-color: #e0ddd5; }
+    .btn-secondary { background: #e0ddd5; color: #555; }
+    .banner { background: linear-gradient(135deg, #fff3e0, #fff); border-color: #ff6b3544; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📞 Appels Symbalyx</h1>
+  <div class="sub">Généré le <span id="date"></span></div>
+</div>
+
+<div class="stats">
+  <div class="stat-card" id="stat-total">
+    <div class="num" id="total-num">0</div>
+    <div class="label">Prospects</div>
+  </div>
+  <div class="stat-card done" id="stat-done">
+    <div class="num" id="done-num">0</div>
+    <div class="label">Appelés</div>
+  </div>
+  <div class="stat-card" id="stat-potential">
+    <div class="num" id="potential-num">0€</div>
+    <div class="label">Potentiel</div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="big">🎯 500€ AUJOURD'HUI</div>
+  <p>15 appels → 3 correctifs (99€) + 1 maintenance (99€/mois) + 1 site (450€)</p>
+</div>
+
+<div id="prospect-list"></div>
+
+<div class="bottom-bar">
+  <button class="btn-primary" onclick="copyCallList()">📋 Copier liste</button>
+  <button class="btn-secondary" onclick="exportResults()">💾 Sauvegarder</button>
+  <button class="btn-secondary" onclick="resetAll()">↺ Reset</button>
+</div>
+
+<script>
+const PROSPECTS = [
+  {
+    id: 1, name: "Lilleplombier", site: "lilleplombier.fr", url: "https://lilleplombier.fr/",
+    phone: "0672721165", score: 26.5,
+    script: "Bonjour, je suis Arsène de Symbalyx. Je suis passé sur votre site lilleplombier.fr et j'ai remarqué qu'il a un bon potentiel mais qu'il manque d'optimisation mobile. C'est un problème courant qui fait perdre 70% des visiteurs. J'ai une solution concrète — je vous explique en 2 minutes ?"
+  },
+  {
+    id: 2, name: "Studio Gymbox", site: "studio-gymbox.fr", url: "https://studio-gymbox.fr/",
+    phone: "0783678315", score: 32.5,
+    script: "Bonjour, Arsène de Symbalyx. Votre site studio-gymbox.fr est clair mais j'ai repéré que vos pages mettent trop de temps à charger — ça fait fuir les visiteurs avant même qu'ils voient vos offres. Je corrige ça en 24h. Je vous explique ?"
+  },
+  {
+    id: 3, name: "Les Filles Les Fleurs", site: "lesfilleslesfleurs.com", url: "https://lesfilleslesfleurs.com/",
+    phone: "0953772299", score: 50,
+    script: "Bonjour, Arsène de Symbalyx — vous avez reçu mon email. Votre site est magnifique mais votre formulaire de contact ne fonctionne pas sur mobile, ça vous coûte des commandes. Je le répare aujourd'hui. Ça vous intéresse ?"
+  },
+  {
+    id: 4, name: "Mariage de Fleurs", site: "mariagedefleurs.fr", url: "https://mariagedefleurs.fr/",
+    phone: "0554519005", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Je vous ai écrit plus tôt. Votre site mariagedefleurs.fr a un problème de sécurité — vos formulaires envoient les données en clair. Je sécurise ça en 2h. Vous êtes disponible 5 minutes pour que je vous montre ?"
+  },
+  {
+    id: 5, name: "Sculpt Bordeaux", site: "sculpt-bordeaux.com", url: "https://www.sculpt-bordeaux.com/",
+    phone: "0557302812", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site sculpt-bordeaux.com est bien fait mais Google ne le trouve pas — vous êtes invisible sur les recherches locales. J'ai une solution pour vous mettre en première page à Bordeaux en 48h. Je vous explique ?"
+  },
+  {
+    id: 6, name: "Marie Rouxeau", site: "marierouxeau.com", url: "https://www.marierouxeau.com/",
+    phone: "0768820820", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. J'ai vu votre travail d'architecte sur marierouxeau.com — superbe. Mais votre portfolio ne s'affiche pas correctement sur téléphone, et 80% de vos clients vous découvrent sur mobile. Je corrige ça. 5 minutes ?"
+  },
+  {
+    id: 7, name: "BÔ M. Architecte", site: "bo-m.fr", url: "https://www.bo-m.fr/",
+    phone: "0651183881", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site bo-m.fr est élégant mais vos images sont trop lourdes — le site met 8 secondes à charger. Vous perdez des clients architectes avant même qu'ils voient votre travail. Je l'optimise aujourd'hui. Intéressé ?"
+  },
+  {
+    id: 8, name: "Hoerner Ordonneau", site: "architectebordeaux.fr", url: "https://www.architectebordeaux.fr/",
+    phone: "0033556790032", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site architectebordeaux.fr a un problème — le certificat SSL est mal configuré, Chrome affiche \"Non sécurisé\". C'est rédhibitoire pour vos clients. Je le répare en 30 minutes. Vous voulez qu'on fasse ça ensemble ?"
+  },
+  {
+    id: 9, name: "Coach33", site: "coach33.fr", url: "https://www.coach33.fr/",
+    phone: "0608760795", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site coach33.fr est clair mais vous n'avez pas de système de réservation en ligne — vos clients doivent vous appeler. Je peux vous installer un calendrier de rendez-vous automatique en 24h. Ça vous parle ?"
+  },
+  {
+    id: 10, name: "Rémi Junk Coaching", site: "coach-sport-bordeaux.fr", url: "https://www.coach-sport-bordeaux.fr/",
+    phone: "0658741645", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. J'ai vu votre site coach-sport-bordeaux.fr. Le problème : vos appels à l'action sont noyés dans le texte, personne ne clique. Je restructure votre page d'accueil pour convertir en 2x plus de clients. Je vous montre ?"
+  },
+  {
+    id: 11, name: "Elite Sport", site: "elitesport.fr", url: "https://www.elitesport.fr/",
+    phone: "0664767695", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site elitesport.fr n'est pas sécurisé en HTTPS — Google le pénalise et vos visiteurs voient un avertissement. Je règle ça en 30 minutes chrono. Vous êtes là ?"
+  },
+  {
+    id: 12, name: "Institut Belle au Naturel", site: "belle-au-naturel.fr", url: "https://test.belle-au-naturel.fr/",
+    phone: "0556928376", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre institut belle-au-naturel.fr — le site est joli mais je suis tombé sur votre version de test. Vous avez besoin qu'on mette en ligne la version finale avec un système de prise de rendez-vous. Je vous fais ça en 2 jours. Intéressé ?"
+  },
+  {
+    id: 13, name: "Institut Naturali", site: "institut-naturali-bordeaux.com", url: "https://institut-naturali-bordeaux.com/",
+    phone: "0533056676", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site institut-naturali-bordeaux.com — vous n'avez pas de page Google My Business correctement liée, vous ratez toutes les recherches locales. Je vous connecte ça en 1h. Je peux vous expliquer ?"
+  },
+  {
+    id: 14, name: "Le Pied à Terre", site: "lepiedaterre-cave.com", url: "https://lepiedaterre-cave.com/",
+    phone: "0547791680", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre cave lepiedaterre-cave.com — vous vendez du vin mais pas de e-commerce. Vous perdez des ventes chaque jour. Je peux vous installer une boutique en ligne prête en 48h. Ça vous intéresse ?"
+  },
+  {
+    id: 15, name: "Ef Coaching Toulouse", site: "ef-coaching-toulouse.fr", url: "https://ef-coaching-toulouse.fr/",
+    phone: "0629566332", score: 50,
+    script: "Bonjour, Arsène de Symbalyx. Votre site ef-coaching-toulouse.fr — pas de témoignages clients visibles, pas de preuve sociale. C'est ce qui fait la différence entre un prospect qui appelle et un qui passe. Je vous ajoute ça aujourd'hui. 5 minutes pour qu'on en parle ?"
+  }
+];
+
+const STORAGE_KEY = 'symbalyx_calls';
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch(e) { return {}; }
+}
+
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function detectWeatherEmoji(score) {
+  if (score < 30) return '🔴';
+  if (score < 40) return '🟡';
+  return '🟢';
+}
+
+function formatPhone(phone) {
+  if (!phone) return '';
+  const clean = phone.replace(/[\s\.\(\)]/g, '');
+  if (clean.startsWith('00')) return '+' + clean.slice(2);
+  if (clean.startsWith('0')) return '+33' + clean.slice(1);
+  return clean;
+}
+
+function render() {
+  const state = loadState();
+  const container = document.getElementById('prospect-list');
+  const doneIds = Object.keys(state).filter(k => state[k].done).length;
+
+  let html = '';
+  PROSPECTS.forEach((p, i) => {
+    const done = state[p.id]?.done || false;
+    const notes = state[p.id]?.notes || '';
+    const emoji = detectWeatherEmoji(p.score);
+    const telLink = 'tel:+' + formatPhone(p.phone);
+
+    html += `
+    <div class="prospect ${done ? 'done' : ''}" data-id="${p.id}" onclick="toggleExpand(${p.id})">
+      <div class="prospect-header">
+        <div class="check" onclick="event.stopPropagation(); toggleDone(${p.id})">${done ? '✓' : ''}</div>
+        <div class="prospect-info">
+          <div class="prospect-name">${emoji} ${p.name}</div>
+          <div class="prospect-site">${p.site}</div>
+        </div>
+        <div class="prospect-score">${done ? '✓' : p.score + '/50'}</div>
+        <a href="${telLink}" class="call-btn" onclick="event.stopPropagation()"><i>📞</i> Appeler</a>
+      </div>
+      <div class="prospect-details">
+        <div class="script-box">
+          <div class="label">🎯 Script d'appel</div>
+          <div class="text">${p.script}</div>
+        </div>
+        <textarea class="prospect-notes" placeholder="Notes après appel..." onclick="event.stopPropagation()" onchange="saveNotes(${p.id}, this.value)">${notes}</textarea>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+
+  // Stats
+  document.getElementById('total-num').textContent = PROSPECTS.length;
+  document.getElementById('done-num').textContent = doneIds;
+
+  // Potential
+  const doneCount = doneIds;
+  const estimatedRevenue = 99 * Math.min(doneCount, 5) + 450 * Math.floor(Math.max(0, doneCount - 2) / 5);
+  document.getElementById('potential-num').textContent = estimatedRevenue + '€';
+}
+
+function toggleDone(id) {
+  const state = loadState();
+  if (!state[id]) state[id] = { done: false, notes: '' };
+  state[id].done = !state[id].done;
+  saveState(state);
+  render();
+}
+
+function toggleExpand(id) {
+  const el = document.querySelector(`.prospect[data-id="${id}"]`);
+  if (el) el.classList.toggle('expanded');
+}
+
+function saveNotes(id, val) {
+  const state = loadState();
+  if (!state[id]) state[id] = { done: false, notes: '' };
+  state[id].notes = val;
+  saveState(state);
+}
+
+function copyCallList() {
+  const state = loadState();
+  const remaining = PROSPECTS.filter(p => !state[p.id]?.done);
+  let text = '📞 LISTE D\'APPELS PRIORITAIRE\n';
+  text += '═══════════════════════════\n\n';
+  remaining.forEach((p, i) => {
+    text += `${i+1}. ${p.name}\n`;
+    text += `   📱 ${p.phone}\n`;
+    text += `   🌐 ${p.site}\n\n`;
+  });
+  text += `═══════════════════════════\n`;
+  text += `${remaining.length} prospects à appeler\n`;
+  text += `🎯 Objectif : 500€`;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(text).then(() => {
+    alert('📋 Liste copiée ! Colle-la dans tes notes.');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('📋 Liste copiée !');
+  });
+}
+
+function exportResults() {
+  const state = loadState();
+  const done = PROSPECTS.filter(p => state[p.id]?.done);
+  const pending = PROSPECTS.filter(p => !state[p.id]?.done);
+
+  let text = '📊 RAPPORT APPELS SYMBALYX\n';
+  text += `📅 ${new Date().toLocaleDateString('fr-FR')}\n`;
+  text += '═══════════════════════════\n\n';
+
+  text += `✅ APELLÉS (${done.length}) :\n`;
+  done.forEach(p => {
+    text += `  ✓ ${p.name} — ${state[p.id]?.notes || '(pas de notes)'}\n`;
+  });
+
+  text += `\n❌ RESTANTS (${pending.length}) :\n`;
+  pending.forEach(p => {
+    text += `  ○ ${p.name} — ${p.phone}\n`;
+  });
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert('📊 Rapport copié !');
+  });
+}
+
+function resetAll() {
+  if (confirm('🗑️ Réinitialiser tous les statuts d\'appels ?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    render();
+  }
+}
+
+// Set date
+document.getElementById('date').textContent = new Date().toLocaleDateString('fr-FR', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+});
+
+render();
+</script>
+</body>
+</html>

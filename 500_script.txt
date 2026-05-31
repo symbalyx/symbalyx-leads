@@ -1,0 +1,80 @@
+SYMBALYX — SCRIPT D'APPEL POUR 500€
+=====================================
+
+PROSPECT #1: Elite Sport — 09 40.97-16.97
+=====================================
+"Bonjour, je suis Arsène de Symbalyx à Bordeaux.
+Je suis passé sur votre site elitesport.fr cette nuit.
+
+(attendre réponse)
+
+J'ai trouvé des failles de sécurité.
+Concrètement, vos identifiants administrateur WordPress sont visibles publiquement.
+N'importe qui peut voir les noms d'utilisateur admin de votre site.
+
+(laisser l'info faire son effet)
+
+Je peux vous montrer ça en direct et le corriger en 30 minutes.
+C'est 99€, tout compris. Vous êtes d'accord pour qu'on regarde ça ?"
+
+SI OUI → Envoyer: https://symbalyx.github.io/symbalyx-leads/correction.html#elite-sport
+SI NON → Envoyer: https://symbalyx.github.io/symbalyx-leads/audit.html (audit gratuit)
+SI PEUT-ÊTRE → "Je vous envoie un lien pour voir le détail. On se rappelle demain ?"
+
+PROSPECT #2: Le Pied à Terre Cave — 08 34 96 08 30
+=====================================
+MÊME SCRIPT — adapter: "cave lepiedaterre-cave.com"
+
+Après appel → https://symbalyx.github.io/symbalyx-leads/correction.html#pied-terre
+
+PROSPECT #3: Pignol — 05 51 45 31 94
+=====================================
+"Bonjour, je suis Arsène de Symbalyx.
+Votre site pignol.fr a des failles de sécurité critiques.
+Je peux les corriger en 30 minutes pour 99€."
+
+Après appel → https://symbalyx.github.io/symbalyx-leads/correction.html#pignol
+
+PROSPECT #4: Les Filles Les Fleurs — 01 32 12 38 53
+=====================================
+"Votre site lesfilleslesfleurs.com a 3 failles WordPress.
+Je peux les corriger en 30 min. 99€ tout compris."
+
+Après appel → https://symbalyx.github.io/symbalyx-leads/correction.html#les-filles
+
+PROSPECT #5: Mariage de Fleurs — 07 90 14 99 37
+=====================================
+"Votre site mariagedefleurs.fr a 3 failles de sécurité.
+99€ pour tout corriger en 30 min."
+
+Après appel → https://symbalyx.github.io/symbalyx-leads/correction.html#mariage-fleurs
+
+PROSPECT #6: Bordeaux Wines — 07 28.60-21 15
+=====================================
+"Votre site bordeauxwine.fr a des failles WordPress.
+99€ correction complète en 30 min."
+
+Après appel → https://symbalyx.github.io/symbalyx-leads/correction.html#bordeaux-wines
+
+=====================================
+CALCUL: 15 appels
+=====================================
+Taux de conversion réaliste: 20-30%
+= 3 à 5 ventes à 99€ = 297€ à 495€
++ 1 site Starter = 450€
++ 1 maintenance = 99€/mois
+
+SCÉNARIO BAS: 3 correctifs × 99€ = 297€
+SCÉNARIO MOYEN: 4 correctifs × 99€ + 1 audit 29€ = 425€
+SCÉNARIO HAUT: 3 correctifs × 149€ + 1 Starter × 450€ = 897€
+
+=====================================
+TACTIQUE DE VENTE
+=====================================
+1. Parle des FAILLES d'abord (preuve concrète)
+2. Propose le Pack 99€ (prix bas = pas de reflexion)
+3. Si "trop cher" → "On peut commencer par la faille critique à 49€"
+4. Si "intéressé mais pas maintenant" → "Je vous envoie le rapport gratuit"
+   et relance J+3
+5. Pour les sites avec budget pub: "Chaque mois sans correctif, 
+   vos pubs Google envoient des clients vers un site non sécurisé"

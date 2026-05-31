@@ -1,0 +1,41 @@
+SYMBALYX — VÉRIFICATION FINALE
+================================
+Date: 1er Juin 2026, ~5h du matin
+Statut: ✅ TOUT OK
+
+PIPELINE EMAIL:
+  Index: 2/113 (111 restants)
+  Prochain envoi: 11h00
+  Rythme: 1/30min, max 13/jour
+  Tracking: ✅ pixel activé
+  Délai dernier envoi: 30/05 19h30
+
+CRONS ACTIFS:
+  8h00 → Récap matinal
+  9h00 → Relances J+3/J+7/J+14
+  11h-17h → Envoi emails (1/30min)
+  8h-19h → Monitoring réponses
+
+PROSPECTS CHAUDS:
+  Top 5: Elite Sport, Le Pied à Terre, Les Filles Les Fleurs, Mariage de Fleurs, Bordeaux Wines
+  Tous avec: failles WP + budget pub + téléphone
+  Score: 95-110/100
+
+ACTIFS:
+  113 drafts (23 remplacés avec preuves WP)
+  97 téléphones extraits
+  23 failles WP détectées (preuve concrète)
+  63 prospects budget pub
+  10 articles blog
+  2 articles Medium
+  5 posts LinkedIn
+  1 playbook commercial
+  1 plan SEO
+  4 pages web live
+
+À FAIRE AU RÉVEIL:
+  1. 📞 Appeler les 15 premiers (call_list.csv)
+  2. 📩 Vérifier réponses Zoho
+  3. 🌐 Envoyer audit tool (symbalyx.github.io/symbalyx-leads/audit.html)
+  4. 📝 Publier article Medium #1
+  5. 📋 Poster LinkedIn #1

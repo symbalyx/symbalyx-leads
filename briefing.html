@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Briefing Symbalyx — Nuit du 31 Mai</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;padding:24px;max-width:800px;margin:0 auto;line-height:1.6}
+h1{font-size:1.6rem;color:#2E1219;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.date{color:#756A62;font-size:.9rem;margin-bottom:24px}
+.section{background:#FFFDF8;border:1px solid rgba(33,26,23,.07);border-radius:16px;padding:20px;margin-bottom:16px}
+h2{font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-box{background:#F7F3EE;border-radius:12px;padding:16px;text-align:center}
+.stat-box .num{font-size:1.8rem;font-weight:800;color:#2E1219}
+.stat-box .label{font-size:.8rem;color:#756A62}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+td,th{padding:6px 4px;text-align:left;border-bottom:1px solid rgba(33,26,23,.07)}
+th{color:#756A62;font-weight:600}
+.tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.7rem;font-weight:600}
+.tag.red{background:#f8d7da;color:#721c24}
+.tag.green{background:#d4edda;color:#155724}
+.tag.gold{background:#fff3cd;color:#856404}
+.tag.blue{background:#d1ecf1;color:#0c5460}
+ol{padding-left:20px}
+li{padding:4px 0}
+a{color:#2E1219;font-weight:600}
+.cta-box{background:linear-gradient(135deg,#FFFDF8,#F0E3D2);border-radius:16px;padding:24px;text-align:center;margin-bottom:16px}
+.cta-box h2{font-size:1.3rem;justify-content:center;margin-bottom:8px}
+.cta-box p{color:#42352E;font-size:.95rem}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<h1>☕ Bon réveil Arsène !</h1>
+<p class="date">Briefing du 1er Juin 2026 — Tout ce qui s'est passé cette nuit</p>
+
+<div class="grid">
+  <div class="stat-box"><div class="num">136</div><div class="label">Drafts dans la file</div></div>
+  <div class="stat-box"><div class="num">97</div><div class="label">Téléphones extraits</div></div>
+  <div class="stat-box"><div class="num">23</div><div class="label">Failles WP détectées</div></div>
+  <div class="stat-box"><div class="num">63</div><div class="label">Prospects budget pub</div></div>
+</div>
+
+<div class="cta-box">
+  <h2>🎯 À faire ce matin</h2>
+  <p>1. 📞 <strong>Appelle les 15 premiers</strong> de la call list (fichier call_list.csv)</p>
+  <p>2. 📩 <strong>Vérifie</strong> arsene@symbalyx.com pour les réponses</p>
+  <p>3. 🌐 <strong>Envoie</strong> l'audit tool à 3 prospects par message</p>
+</div>
+
+<div class="section">
+  <h2>📧 Pipeline email — 113 → 136 drafts</h2>
+  <table>
+    <tr><td>Drafts dans la file</td><td><strong>136</strong></td></tr>
+    <tr><td>Déjà envoyés</td><td><strong>2</strong> (Les Filles Les Fleurs, Mariage de Fleurs)</td></tr>
+    <tr><td>Nouveaux cette nuit</td><td><strong>23</strong> emails sécurité WordPress</td></tr>
+    <tr><td>Format</td><td>PRO + preuve de faille réelle</td></tr>
+    <tr><td>Prochain envoi</td><td><strong>11h00</strong> — 1 mail/30min, 13 max/jour</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>📞 Call list — Appelle ces 15 prospects</h2>
+  <table>
+    <tr><th>#</th><th>Business</th><th>📞 Téléphone</th><th>💡 Angle</th></tr>
+    <tr><td>1</td><td>Pignol</td><td>? (call_list.csv)</td><td><span class="tag red">4 failles WP</span></td></tr>
+    <tr><td>2</td><td>Elite Sport</td><td>09 40.97-16.97</td><td><span class="tag red">4 failles WP</span></td></tr>
+    <tr><td>3</td><td>Le Pied à Terre</td><td>08 34 96 08 30</td><td><span class="tag red">4 failles WP</span></td></tr>
+    <tr><td>4</td><td>Anicura</td><td>03 20 51 00 66</td><td><span class="tag gold">💰 budget pub</span></td></tr>
+    <tr><td>5</td><td>Sculpt Bordeaux</td><td>05 57 30 28 12</td><td><span class="tag blue">Local</span></td></tr>
+    <tr><td>6</td><td>Marie Rouxeau</td><td>07 68 82 08 20</td><td><span class="tag red">3 failles WP</span></td></tr>
+    <tr><td>7</td><td>Hoerner Ordonneau</td><td>03 35 56 79 00</td><td><span class="tag red">3 failles WP</span></td></tr>
+    <tr><td>8</td><td>Bergamotte</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub ++</span></td></tr>
+    <tr><td>9</td><td>Institut Belle Naturel</td><td>06 99 88 06 71</td><td><span class="tag red">3 failles WP</span></td></tr>
+    <tr><td>10</td><td>Bordeaux Wines</td><td>07 28.60-21 15</td><td><span class="tag red">3 failles WP</span></td></tr>
+    <tr><td>11</td><td>Un Brin de Folie</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub</span></td></tr>
+    <tr><td>12</td><td>Franck Harter</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub</span></td></tr>
+    <tr><td>13</td><td>Le Singe au Dahlia</td><td>? (call_list.csv)</td><td><span class="tag red">2 failles WP</span></td></tr>
+    <tr><td>14</td><td>Florian Coaching</td><td>? (call_list.csv)</td><td><span class="tag red">3 failles WP</span></td></tr>
+    <tr><td>15</td><td>Cassandre Verdier</td><td>? (call_list.csv)</td><td><span class="tag red">3 failles WP</span></td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🔍 Sites live — utilise-les pour la prospection</h2>
+  <table>
+    <tr><td>Landing page lead</td><td><a href="https://symbalyx.github.io/symbalyx-leads/">symbalyx.github.io/symbalyx-leads/</a></td></tr>
+    <tr><td>Self-service audit</td><td><a href="https://symbalyx.github.io/symbalyx-leads/audit.html">audit.html</a> ← envoie ce lien aux prospects</td></tr>
+    <tr><td>Page merci</td><td><a href="https://symbalyx.github.io/symbalyx-leads/merci.html">merci.html</a></td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>📊 Chiffres clés de la nuit</h2>
+  <table>
+    <tr><td>🔴 WordPress avec failles</td><td><strong>23</strong> — emails remplacés avec preuves concrètes</td></tr>
+    <tr><td>💰 Budget pub détecté</td><td><strong>63</strong> prospects — Google Ads, Analytics, GTM</td></tr>
+    <tr><td>📞 Téléphones extraits</td><td><strong>97</strong> numéros — call list prête</td></tr>
+    <tr><td>🔐 SSL expirant</td><td><strong>0</strong> — tous les sites sont OK</td></tr>
+    <tr><td>📧 File d'envoi</td><td><strong>136</strong> drafts, suivi tracking pixel activé</td></tr>
+    <tr><td>🌐 Audit tool</td><td><strong>3 pages</strong> deployées sur GitHub Pages</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🎯 Script d'appel — pour les failles WP</h2>
+  <p style="font-size:.9rem;background:#F7F3EE;padding:16px;border-radius:12px;font-family:monospace">
+"Bonjour, je suis Arsène de Symbalyx, studio web à Bordeaux.<br><br>
+Je suis passé sur votre site WordPress cette nuit et j'ai trouvé des failles de sécurité :<br>
+→ [cite la faille la plus grave]<br><br>
+Concrètement, n'importe qui peut voir ces informations sur votre site.<br>
+Je peux vous montrer ce que je vois et le corriger en 15 minutes.<br><br>
+Vous êtes disponible pour qu'on échange 10 minutes ?"
+  </p>
+</div>
+
+<div class="section">
+  <h2>📋 Fichiers utiles</h2>
+  <table>
+    <tr><td>Call list complète</td><td>/tmp/call_list.csv</td></tr>
+    <tr><td>Scripts d'appel</td><td>/tmp/call_scripts.txt</td></tr>
+    <tr><td>Failles WordPress</td><td>/tmp/wp_vulnerabilities.json</td></tr>
+    <tr><td>Prospects budget pub</td><td>/tmp/ads_prospects.json</td></tr>
+    <tr><td>Briefing HTML</td><td>/tmp/briefing_matin.html</td></tr>
+    <tr><td>Articles Medium</td><td>/opt/data/scripts/medium-article-*-pub.md</td></tr>
+    <tr><td>Posts LinkedIn</td><td>/opt/data/scripts/linkedin-strategy.md</td></tr>
+    <tr><td>Playbook commercial</td><td>/opt/data/scripts/sales-playbook.md</td></tr>
+    <tr><td>Articles blog</td><td>/opt/data/home/blog-*.md</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center;padding:24px;color:#756A62;font-size:.9rem">
+  <p>🔥 Bonne journée boss. La machine tourne toute seule.</p>
+  <p style="margin-top:4px">Prochains envois automatiques : 8h récap — 9h relances — 11h-17h emails</p>
+</div>
+
+</body>
+</html>

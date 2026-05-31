@@ -1,141 +1,219 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Briefing Symbalyx — Nuit du 31 Mai</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 BRIEFING 500€ — Symbalyx</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;padding:24px;max-width:800px;margin:0 auto;line-height:1.6}
-h1{font-size:1.6rem;color:#2E1219;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.date{color:#756A62;font-size:.9rem;margin-bottom:24px}
-.section{background:#FFFDF8;border:1px solid rgba(33,26,23,.07);border-radius:16px;padding:20px;margin-bottom:16px}
-h2{font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat-box{background:#F7F3EE;border-radius:12px;padding:16px;text-align:center}
-.stat-box .num{font-size:1.8rem;font-weight:800;color:#2E1219}
-.stat-box .label{font-size:.8rem;color:#756A62}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-td,th{padding:6px 4px;text-align:left;border-bottom:1px solid rgba(33,26,23,.07)}
-th{color:#756A62;font-weight:600}
-.tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.7rem;font-weight:600}
-.tag.red{background:#f8d7da;color:#721c24}
-.tag.green{background:#d4edda;color:#155724}
-.tag.gold{background:#fff3cd;color:#856404}
-.tag.blue{background:#d1ecf1;color:#0c5460}
-ol{padding-left:20px}
-li{padding:4px 0}
-a{color:#2E1219;font-weight:600}
-.cta-box{background:linear-gradient(135deg,#FFFDF8,#F0E3D2);border-radius:16px;padding:24px;text-align:center;margin-bottom:16px}
-.cta-box h2{font-size:1.3rem;justify-content:center;margin-bottom:8px}
-.cta-box p{color:#42352E;font-size:.95rem}
-@media(max-width:480px){.grid{grid-template-columns:1fr}}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
+
+  h1 { font-size: 26px; font-weight: 800; color: #ff6b35; letter-spacing: -1px; margin-bottom: 4px; }
+  .date { font-size: 13px; color: #555; margin-bottom: 20px; }
+
+  .big-number { text-align: center; padding: 24px; background: linear-gradient(135deg, #1a1a28, #13131a); border-radius: 20px; border: 2px solid #ff6b3544; margin-bottom: 20px; }
+  .big-number .amount { font-size: 52px; font-weight: 900; color: #ff6b35; letter-spacing: -2px; }
+  .big-number .sub { font-size: 14px; color: #888; margin-top: 4px; }
+
+  .section { margin-bottom: 20px; }
+  .section-title { font-size: 14px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card { background: #13131a; border-radius: 14px; padding: 16px; border: 1px solid #1e1e2a; margin-bottom: 10px; }
+  .card.gold { border-color: #ff6b3544; background: linear-gradient(135deg, #1a1a2e, #13131a); }
+  .card.green { border-color: #00c85344; }
+  .card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .card p, .card li { font-size: 13px; color: #999; line-height: 1.5; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 6px 0; border-bottom: 1px solid #1a1a28; display: flex; gap: 8px; align-items: flex-start; }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before { content: '→'; color: #ff6b35; font-weight: 700; flex-shrink: 0; }
+
+  .step { display: flex; gap: 12px; margin-bottom: 12px; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: #ff6b35; color: #000; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-content { flex: 1; }
+  .step-content h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .step-content p { font-size: 12px; color: #888; line-height: 1.4; }
+
+  .links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .link-card { background: #13131a; border: 1px solid #1e1e2a; border-radius: 12px; padding: 14px; text-align: center; text-decoration: none; }
+  .link-card .emoji { font-size: 24px; margin-bottom: 4px; }
+  .link-card .label { font-size: 12px; font-weight: 600; color: #fff; }
+  .link-card .url { font-size: 9px; color: #ff6b35; margin-top: 2px; word-break: break-all; }
+  .link-card:active { transform: scale(0.97); }
+
+  .script-card { background: #0d0d14; border: 1px solid #ff6b3522; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+  .script-card .label { font-size: 10px; text-transform: uppercase; color: #555; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .script-card .text { font-size: 13px; line-height: 1.6; color: #bbb; font-style: italic; }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f5f0; color: #222; }
+    .section-title { color: #000; }
+    .card { background: #fff; border-color: #e0ddd5; }
+    .card h3 { color: #000; }
+    .card p, .card li { color: #555; }
+    .card ul li { border-color: #eee; }
+    .card.gold { background: linear-gradient(135deg, #fff3e0, #fff); }
+    .script-card { background: #f8f8f4; }
+    .big-number { background: linear-gradient(135deg, #fff3e0, #fff); }
+    .link-card { background: #fff; border-color: #e0ddd5; }
+    .link-card .label { color: #000; }
+    .step-content h3 { color: #000; }
+  }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<h1>☕ Bon réveil Arsène !</h1>
-<p class="date">Briefing du 1er Juin 2026 — Tout ce qui s'est passé cette nuit</p>
+<h1>🔥 BRIEFING 500€</h1>
+<div class="date" id="date"></div>
 
-<div class="grid">
-  <div class="stat-box"><div class="num">136</div><div class="label">Drafts dans la file</div></div>
-  <div class="stat-box"><div class="num">97</div><div class="label">Téléphones extraits</div></div>
-  <div class="stat-box"><div class="num">23</div><div class="label">Failles WP détectées</div></div>
-  <div class="stat-box"><div class="num">63</div><div class="label">Prospects budget pub</div></div>
-</div>
-
-<div class="cta-box">
-  <h2>🎯 À faire ce matin</h2>
-  <p>1. 📞 <strong>Appelle les 15 premiers</strong> de la call list (fichier call_list.csv)</p>
-  <p>2. 📩 <strong>Vérifie</strong> arsene@symbalyx.com pour les réponses</p>
-  <p>3. 🌐 <strong>Envoie</strong> l'audit tool à 3 prospects par message</p>
+<div class="big-number">
+  <div class="amount">500€</div>
+  <div class="sub">Objectif du jour · 5 ventes · 80 prospects</div>
 </div>
 
 <div class="section">
-  <h2>📧 Pipeline email — 113 → 136 drafts</h2>
-  <table>
-    <tr><td>Drafts dans la file</td><td><strong>136</strong></td></tr>
-    <tr><td>Déjà envoyés</td><td><strong>2</strong> (Les Filles Les Fleurs, Mariage de Fleurs)</td></tr>
-    <tr><td>Nouveaux cette nuit</td><td><strong>23</strong> emails sécurité WordPress</td></tr>
-    <tr><td>Format</td><td>PRO + preuve de faille réelle</td></tr>
-    <tr><td>Prochain envoi</td><td><strong>11h00</strong> — 1 mail/30min, 13 max/jour</td></tr>
-  </table>
+  <div class="section-title">📋 PLAN D'ATTAQUE</div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Ouvre le tableau de bord</h3>
+      <p>80 prospects avec téléphone, triés par score. Appuie sur "Appel" pour composer automatiquement.</p>
+      <a href="call-dashboard.html" style="display:inline-block;margin-top:6px;padding:6px 14px;background:#ff6b35;color:#000;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600">📞 Ouvrir le tableau de bord →</a>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Appelle les 15 premiers</h3>
+      <p>Un script est prêt pour chaque appel. Tu coches "fait" après chaque appel.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Envoie le diagnostic</h3>
+      <p>Pendant l'appel, envoie par SMS : <code style="color:#ff6b35">symbalyx.github.io/symbalyx-leads/correction.html</code></p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Propose le Correctif Express 99€</h3>
+      <p>"Je corrige le problème aujourd'hui. Résultat garanti. Si t'es pas satisfait, t'es remboursé."</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Enchaîne sur la maintenance 99€/mois</h3>
+      <p>"Et après, je peux garder ton site à jour pour 99€ par mois. Plus de souci technique."</p>
+    </div>
+  </div>
 </div>
 
 <div class="section">
-  <h2>📞 Call list — Appelle ces 15 prospects</h2>
-  <table>
-    <tr><th>#</th><th>Business</th><th>📞 Téléphone</th><th>💡 Angle</th></tr>
-    <tr><td>1</td><td>Pignol</td><td>? (call_list.csv)</td><td><span class="tag red">4 failles WP</span></td></tr>
-    <tr><td>2</td><td>Elite Sport</td><td>09 40.97-16.97</td><td><span class="tag red">4 failles WP</span></td></tr>
-    <tr><td>3</td><td>Le Pied à Terre</td><td>08 34 96 08 30</td><td><span class="tag red">4 failles WP</span></td></tr>
-    <tr><td>4</td><td>Anicura</td><td>03 20 51 00 66</td><td><span class="tag gold">💰 budget pub</span></td></tr>
-    <tr><td>5</td><td>Sculpt Bordeaux</td><td>05 57 30 28 12</td><td><span class="tag blue">Local</span></td></tr>
-    <tr><td>6</td><td>Marie Rouxeau</td><td>07 68 82 08 20</td><td><span class="tag red">3 failles WP</span></td></tr>
-    <tr><td>7</td><td>Hoerner Ordonneau</td><td>03 35 56 79 00</td><td><span class="tag red">3 failles WP</span></td></tr>
-    <tr><td>8</td><td>Bergamotte</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub ++</span></td></tr>
-    <tr><td>9</td><td>Institut Belle Naturel</td><td>06 99 88 06 71</td><td><span class="tag red">3 failles WP</span></td></tr>
-    <tr><td>10</td><td>Bordeaux Wines</td><td>07 28.60-21 15</td><td><span class="tag red">3 failles WP</span></td></tr>
-    <tr><td>11</td><td>Un Brin de Folie</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub</span></td></tr>
-    <tr><td>12</td><td>Franck Harter</td><td>? (call_list.csv)</td><td><span class="tag gold">💰 budget pub</span></td></tr>
-    <tr><td>13</td><td>Le Singe au Dahlia</td><td>? (call_list.csv)</td><td><span class="tag red">2 failles WP</span></td></tr>
-    <tr><td>14</td><td>Florian Coaching</td><td>? (call_list.csv)</td><td><span class="tag red">3 failles WP</span></td></tr>
-    <tr><td>15</td><td>Cassandre Verdier</td><td>? (call_list.csv)</td><td><span class="tag red">3 failles WP</span></td></tr>
-  </table>
+  <div class="section-title">🎯 SCRIPT D'APPEL</div>
+
+  <div class="script-card">
+    <div class="label">Ouverture (15 secondes)</div>
+    <div class="text">"Bonjour [prénom], c'est Arsène de Symbalyx. Je suis passé sur votre site et j'ai repéré un problème technique qui vous coûte des clients. Je peux vous le corriger en 24h, 99€. Vous avez 2 minutes que je vous explique ?"</div>
+  </div>
+
+  <div class="script-card">
+    <div class="label">Si intéressé</div>
+    <div class="text">"Voilà le problème : [cite la faille]. Je le répare aujourd'hui, je vous envoie un rapport après. Paiement à la livraison si vous voulez."</div>
+  </div>
+
+  <div class="script-card">
+    <div class="label">Si pas intéressé</div>
+    <div class="text">"Pas de souci. Je vous laisse mon email : arsene@symbalyx.com. Si vous changez d'avis, le diagnostic gratuit est en ligne. Bonne journée !"</div>
+  </div>
+
+  <div class="script-card">
+    <div class="label">Relance maintenance</div>
+    <div class="text">"Et si je vous garde votre site à jour pour 99€/mois ? Mises à jour sécurité, sauvegardes, monitoring. Vous ne touchez plus à rien."</div>
+  </div>
 </div>
 
 <div class="section">
-  <h2>🔍 Sites live — utilise-les pour la prospection</h2>
-  <table>
-    <tr><td>Landing page lead</td><td><a href="https://symbalyx.github.io/symbalyx-leads/">symbalyx.github.io/symbalyx-leads/</a></td></tr>
-    <tr><td>Self-service audit</td><td><a href="https://symbalyx.github.io/symbalyx-leads/audit.html">audit.html</a> ← envoie ce lien aux prospects</td></tr>
-    <tr><td>Page merci</td><td><a href="https://symbalyx.github.io/symbalyx-leads/merci.html">merci.html</a></td></tr>
-  </table>
+  <div class="section-title">💰 TARIFS À ENVOYER APRÈS L'APPEL</div>
+
+  <div class="card">
+    <ul>
+      <li><strong style="color:#ff6b35">Correctif Express</strong> — 99€ (une fois) — Un bug, réparé en 24h</li>
+      <li><strong style="color:#00c853">Audit Sécurité & SEO</strong> — 29€ (une fois) — Rapport PDF 4 pages</li>
+      <li><strong style="color:#ff6b35">Site Starter</strong> — 450€ (une fois) — Site vitrine 5 pages</li>
+      <li><strong style="color:#ff6b35">Maintenance mensuelle</strong> — 99€/mois — Revenu récurrent</li>
+      <li><strong style="color:#ff6b35">Pack Présence Locale</strong> — 149€ (une fois) — Google My Business + SEO</li>
+    </ul>
+    <a href="services.html" style="display:block;margin-top:10px;text-align:center;color:#ff6b35;text-decoration:none;font-weight:600;font-size:13px">Voir les services détaillés →</a>
+  </div>
 </div>
 
 <div class="section">
-  <h2>📊 Chiffres clés de la nuit</h2>
-  <table>
-    <tr><td>🔴 WordPress avec failles</td><td><strong>23</strong> — emails remplacés avec preuves concrètes</td></tr>
-    <tr><td>💰 Budget pub détecté</td><td><strong>63</strong> prospects — Google Ads, Analytics, GTM</td></tr>
-    <tr><td>📞 Téléphones extraits</td><td><strong>97</strong> numéros — call list prête</td></tr>
-    <tr><td>🔐 SSL expirant</td><td><strong>0</strong> — tous les sites sont OK</td></tr>
-    <tr><td>📧 File d'envoi</td><td><strong>136</strong> drafts, suivi tracking pixel activé</td></tr>
-    <tr><td>🌐 Audit tool</td><td><strong>3 pages</strong> deployées sur GitHub Pages</td></tr>
-  </table>
+  <div class="section-title">📊 PROJECTION 500€</div>
+
+  <div class="card gold">
+    <h3>Scénario : 15 appels</h3>
+    <ul>
+      <li><strong>~5 décrochent</strong> → 3 intéressés</li>
+      <li><strong>3 correctifs 99€</strong> = 297€</li>
+      <li><strong>1 maintenance 99€/mois</strong> = +99€/mois</li>
+      <li><strong>Total jour 1 : 297€ + 99€/mois</strong></li>
+      <li style="color:#ff6b35;font-weight:700;padding-top:6px;border-color:#ff6b3544">↓ 500€ en J+3 avec relances</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <h3>Scénario : 80 appels (semaine)</h3>
+    <ul>
+      <li><strong>25 décrochent</strong> → 15 intéressés</li>
+      <li><strong>10 correctifs 99€</strong> = 990€</li>
+      <li><strong>3 maintenances</strong> = +297€/mois</li>
+      <li><strong>1 site starter 450€</strong> = +450€</li>
+      <li style="color:#ff6b35;font-weight:700;padding-top:6px;border-color:#ff6b3544">🔥 Total : 1 440€ + 297€/mois</li>
+    </ul>
+  </div>
 </div>
 
 <div class="section">
-  <h2>🎯 Script d'appel — pour les failles WP</h2>
-  <p style="font-size:.9rem;background:#F7F3EE;padding:16px;border-radius:12px;font-family:monospace">
-"Bonjour, je suis Arsène de Symbalyx, studio web à Bordeaux.<br><br>
-Je suis passé sur votre site WordPress cette nuit et j'ai trouvé des failles de sécurité :<br>
-→ [cite la faille la plus grave]<br><br>
-Concrètement, n'importe qui peut voir ces informations sur votre site.<br>
-Je peux vous montrer ce que je vois et le corriger en 15 minutes.<br><br>
-Vous êtes disponible pour qu'on échange 10 minutes ?"
-  </p>
+  <div class="section-title">🔗 ACCÈS RAPIDES</div>
+
+  <div class="links">
+    <a class="link-card" href="call-dashboard.html">
+      <div class="emoji">📞</div>
+      <div class="label">Appels</div>
+      <div class="url">80 prospects</div>
+    </a>
+    <a class="link-card" href="services.html">
+      <div class="emoji">🛠️</div>
+      <div class="label">Services</div>
+      <div class="url">Prix clairs</div>
+    </a>
+    <a class="link-card" href="correction.html">
+      <div class="emoji">🔍</div>
+      <div class="label">Diagnostics</div>
+      <div class="url">80 sites</div>
+    </a>
+    <a class="link-card" href="audit.html">
+      <div class="emoji">📊</div>
+      <div class="label">Audit</div>
+      <div class="url">Auto-service</div>
+    </a>
+  </div>
 </div>
 
-<div class="section">
-  <h2>📋 Fichiers utiles</h2>
-  <table>
-    <tr><td>Call list complète</td><td>/tmp/call_list.csv</td></tr>
-    <tr><td>Scripts d'appel</td><td>/tmp/call_scripts.txt</td></tr>
-    <tr><td>Failles WordPress</td><td>/tmp/wp_vulnerabilities.json</td></tr>
-    <tr><td>Prospects budget pub</td><td>/tmp/ads_prospects.json</td></tr>
-    <tr><td>Briefing HTML</td><td>/tmp/briefing_matin.html</td></tr>
-    <tr><td>Articles Medium</td><td>/opt/data/scripts/medium-article-*-pub.md</td></tr>
-    <tr><td>Posts LinkedIn</td><td>/opt/data/scripts/linkedin-strategy.md</td></tr>
-    <tr><td>Playbook commercial</td><td>/opt/data/scripts/sales-playbook.md</td></tr>
-    <tr><td>Articles blog</td><td>/opt/data/home/blog-*.md</td></tr>
-  </table>
+<div class="big-number" style="margin-top:24px">
+  <div class="amount">🔥 GO</div>
+  <div class="sub">Tu as tout ce qu'il faut. Appelle, corrige, encaisse.</div>
 </div>
 
-<div style="text-align:center;padding:24px;color:#756A62;font-size:.9rem">
-  <p>🔥 Bonne journée boss. La machine tourne toute seule.</p>
-  <p style="margin-top:4px">Prochains envois automatiques : 8h récap — 9h relances — 11h-17h emails</p>
-</div>
-
+<script>document.getElementById('date').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });</script>
 </body>
 </html>

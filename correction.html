@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Problème sécurité détecté — Correction 99€</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;padding:16px;max-width:500px;margin:0 auto}
+.alert{background:#f8d7da;color:#721c24;padding:16px;border-radius:16px;margin-bottom:16px;font-weight:700;font-size:1.1rem;text-align:center}
+.card{background:#FFFDF8;border:1px solid rgba(33,26,23,.07);border-radius:16px;padding:20px;margin-bottom:12px}
+h1{font-size:1.3rem;margin-bottom:8px}
+h2{font-size:1.1rem;margin-bottom:8px}
+.finding{padding:10px;margin:6px 0;border-radius:10px;font-size:.9rem}
+.finding.critical{background:#f8d7da;color:#721c24}
+.finding.high{background:#fff3cd;color:#856404}
+.finding.medium{background:#d1ecf1;color:#0c5460}
+.price{font-size:2.5rem;font-weight:800;color:#2E1219;text-align:center;padding:12px}
+.price small{font-size:.9rem;font-weight:400;color:#756A62}
+.btn{display:block;padding:16px;background:#2E1219;color:#FFFDF8;border:none;border-radius:14px;font-size:1.1rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;margin:12px 0}
+.btn:hover{background:#43212A}
+.btn.secondary{background:#FFFDF8;color:#2E1219;border:2px solid #2E1219}
+.steps{padding:0;list-style:none}
+.steps li{padding:10px 0;border-bottom:1px solid rgba(33,26,23,.07);font-size:.9rem;display:flex;gap:10px;align-items:flex-start}
+.steps li:last-child{border:0}
+.step-num{background:#2E1219;color:#FFFDF8;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.7rem;font-weight:600}
+.tag.danger{background:#f8d7da;color:#721c24}
+.tag.warning{background:#fff3cd;color:#856404}
+.tag.success{background:#d4edda;color:#155724}
+.url-box{font-family:monospace;font-size:.8rem;background:#F7F3EE;padding:8px 12px;border-radius:8px;word-break:break-all;margin:8px 0}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+// Prospect data from the system
+const PROSPECTS = [
+  {id:"elite-sport", name:"Elite Sport", url:"https://www.elitesport.fr", phone:"09 40.97-16.97", email:"contact@elitesport.fr",
+   findings:[
+     {severity:"critical", text:"Identifiants administrateur WordPress visibles (WP Users API exposée)"},
+     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP (peut révéler mots de passe)"},
+     {severity:"high", text:"Version WordPress exposée (facilite le ciblage par les hackers)"},
+     {severity:"high", text:"XML-RPC activé (permet les attaques par force brute)"}
+   ], ads:["Google Analytics","GTM"], score:110},
+  {id:"pied-terre", name:"Le Pied à Terre", url:"https://lepiedaterre-cave.com", phone:"08 34 96 08 30", email:"contact@lepiedaterre-cave.fr",
+   findings:[
+     {severity:"critical", text:"Identifiants administrateur WordPress visibles (WP Users API exposée)"},
+     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP"},
+     {severity:"high", text:"Version WordPress exposée"},
+     {severity:"high", text:"XML-RPC activé (brute-force possible)"}
+   ], ads:["Google Analytics","GTM"], score:110},
+  {id:"pignol", name:"Pignol", url:"https://www.pignol.fr", phone:"05 51 45 31 94", email:"info@pignol.fr",
+   findings:[
+     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
+     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP"},
+     {severity:"high", text:"Version WordPress exposée"},
+     {severity:"high", text:"XML-RPC activé"}
+   ], ads:["Google Analytics"], score:90},
+  {id:"les-filles", name:"Les Filles Les Fleurs", url:"https://lesfilleslesfleurs.com", phone:"01 32 12 38 53", email:"lesfilleslesfleurs@gmail.com",
+   findings:[
+     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
+     {severity:"high", text:"Fichier debug.log public"},
+     {severity:"high", text:"Version WordPress exposée"}
+   ], ads:["Google Analytics","GTM","Mailchimp"], score:95},
+  {id:"mariage-fleurs", name:"Mariage de Fleurs", url:"https://mariagedefleurs.fr", phone:"07 90 14 99 37", email:"mariagedefleurs@gmail.com",
+   findings:[
+     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
+     {severity:"high", text:"Fichier debug.log public"},
+     {severity:"high", text:"Version WordPress exposée"}
+   ], ads:["GTM","LinkedIn Ads"], score:95},
+  {id:"bordeaux-wines", name:"Bordeaux Wines", url:"https://www.bordeauxwine.fr", phone:"07 28.60-21 15", email:"johnmitra@bordeauxwine.fr",
+   findings:[
+     {severity:"high", text:"Fichier debug.log public contenant des erreurs PHP"},
+     {severity:"high", text:"Version WordPress exposée"},
+     {severity:"high", text:"XML-RPC activé"}
+   ], ads:["Google Analytics","GTM","Mailchimp"], score:95}
+];
+
+// Get prospect from URL hash
+const hash = window.location.hash.slice(1) || "elite-sport";
+const p = PROSPECTS.find(x => x.id === hash) || PROSPECTS[0];
+
+const severityLabel = {critical:"🔴 Critique", high:"🟡 Élevée", medium:"🔵 Moyenne"};
+const severityClass = {critical:"critical", high:"high", medium:"medium"};
+
+const app = document.getElementById("app");
+app.innerHTML = `
+<div class="alert">🔴 3 à 4 failles de sécurité détectées sur ${p.name}</div>
+
+<div class="card">
+  <h2>📌 ${p.name}</h2>
+  <div class="url-box">${p.url}</div>
+  <p style="font-size:.85rem;color:#756A62">📞 ${p.phone} · 📧 ${p.email}</p>
+  ${p.ads.length ? `<p style="font-size:.8rem;color:#856404;margin-top:6px">💰 Budget pub: ${p.ads.join(" · ")}</p>` : ""}
+</div>
+
+<div class="card">
+  <h2>🔴 Failles de sécurité trouvées</h2>
+  ${p.findings.map(f => `
+    <div class="finding ${severityClass[f.severity]}">
+      ${severityLabel[f.severity]}:<br>${f.text}
+    </div>
+  `).join("")}
+</div>
+
+<div class="card" style="background:linear-gradient(135deg,#FFFDF8,#F0E3D2)">
+  <div class="price">99€ <small>TTC</small></div>
+  <p style="text-align:center;color:#756A62;font-size:.9rem">Pack Sécurité Express — Correction complète en 30 min</p>
+  <a href="mailto:arsene@symbalyx.com?subject=Sécurité%20${encodeURIComponent(p.name)}&body=Bonjour%20Arsène%2C%0A%0AJ'ai%20vu%20les%20failles%20sur%20mon%20site.%20Je%20suis%20intéressé%20par%20le%20Pack%20Sécurité%20à%2099€.%0A%0AMon%20site%20:${encodeURIComponent(p.url)}%0A%0AMon%20téléphone%20:" class="btn">📩 Oui, je veux sécuriser mon site</a>
+  <a href="mailto:arsene@symbalyx.com?subject=Info%20${encodeURIComponent(p.name)}" class="btn secondary">❓ J'ai des questions</a>
+</div>
+
+<div class="card">
+  <h2>📋 Comment ça marche</h2>
+  <ol class="steps">
+    <li><span class="step-num">1</span> <strong>15 min d'appel</strong> — Je vous montre les failles sur votre site en direct</li>
+    <li><span class="step-num">2</span> <strong>30 min de correctif</strong> — Je sécurise tout (users, logs, version, XML-RPC)</li>
+    <li><span class="step-num">3</span> <strong>Rapport fourni</strong> — Vous avez la preuve que tout est corrigé</li>
+  </ol>
+</div>
+
+<div style="text-align:center;color:#756A62;padding:16px;font-size:.85rem">
+  <p>Arsène — Symbalyx, studio web Bordeaux</p>
+  <p style="margin-top:4px">arsene@symbalyx.com · https://symbalyx.com</p>
+</div>
+`;
+</script>
+</body>
+</html>

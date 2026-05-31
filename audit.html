@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit Site Web Gratuit — Symbalyx Bordeaux</title>
+<meta name="description" content="Obtenez un audit gratuit de votre site web : sécurité, mobile, SEO, performance. Résultat en 30 secondes.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;line-height:1.6}
+.wrap{max-width:680px;margin:0 auto;padding:40px 24px}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:8px;color:#2E1219}
+.sub{font-size:1.1rem;color:#756A62;margin-bottom:32px}
+.input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.input-group input{flex:1;min-width:200px;padding:16px 20px;border-radius:14px;border:1px solid rgba(33,26,23,.15);font-size:1rem;background:#FFFDF8}
+.input-group button{padding:16px 32px;background:#2E1219;color:#FFFDF8;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.input-group button:hover{background:#43212A}
+.trust{font-size:.85rem;color:#A09388;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+.card{background:#FFFDF8;border:1px solid rgba(33,26,23,.07);border-radius:16px;padding:20px;text-align:center}
+.card .icon{font-size:2rem;margin-bottom:8px}
+.card h3{font-size:.95rem;margin-bottom:4px}
+.card p{font-size:.8rem;color:#756A62}
+.results{display:none;background:#FFFDF8;border:1px solid rgba(33,26,23,.11);border-radius:24px;padding:32px;margin-bottom:32px}
+.results.show{display:block}
+.results h2{font-size:1.2rem;margin-bottom:16px}
+.result-item{padding:12px 0;border-bottom:1px solid rgba(33,26,23,.07);display:flex;justify-content:space-between;align-items:center}
+.result-item:last-child{border:0}
+.status{font-weight:700;padding:4px 12px;border-radius:100px;font-size:.8rem}
+.status.good{background:#d4edda;color:#155724}
+.status.bad{background:#f8d7da;color:#721c24}
+.status.warn{background:#fff3cd;color:#856404}
+.score-ring{width:100px;height:100px;border-radius:50%;border:6px solid;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;font-weight:800}
+.loading{display:none;text-align:center;padding:20px}
+.loading.show{display:block}
+.spinner{width:32px;height:32px;border:3px solid #EFE7DB;border-top-color:#2E1219;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto 8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pricing{margin-top:24px;padding:24px;background:linear-gradient(135deg,#FFFDF8,#F0E3D2);border-radius:16px;text-align:center}
+.pricing h3{font-size:1.1rem;margin-bottom:8px}
+.pricing .price{font-size:2rem;font-weight:800;color:#2E1219}
+.pricing p{font-size:.85rem;color:#756A62;margin:8px 0 16px}
+.pricing .btn{display:inline-block;padding:14px 36px;background:#2E1219;color:#FFFDF8;border-radius:100px;text-decoration:none;font-weight:700}
+footer{text-align:center;font-size:.8rem;color:#A09388;padding:24px;border-top:1px solid rgba(33,26,23,.07)}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔍 Audit gratuit de votre site web</h1>
+  <p class="sub">Entrez l'URL de votre site. En 15 secondes, vous saurez exactement ce qui claque... et ce qui cloche.</p>
+  
+  <div class="input-group">
+    <input type="url" id="siteUrl" placeholder="https://votre-site.fr" value="https://symbalyx.com">
+    <button onclick="runAudit()">Auditer →</button>
+  </div>
+  <p class="trust">🔒 Aucune donnée stockée. Résultat instantané. Gratuit.</p>
+  
+  <div class="grid">
+    <div class="card"><div class="icon">📱</div><h3>Mobile</h3><p>Adapté aux smartphones ?</p></div>
+    <div class="card"><div class="icon">🔒</div><h3>Sécurité</h3><p>SSL, headers, CSP</p></div>
+    <div class="card"><div class="icon">⚡</div><h3>Performance</h3><p>Temps de chargement</p></div>
+    <div class="card"><div class="icon">📈</div><h3>SEO</h3><p>Meta, structure, balises</p></div>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div><p>Analyse en cours...</p></div>
+  
+  <div class="results" id="results">
+    <h2>📊 Résultat de l'audit</h2>
+    <div id="scoreDisplay" style="text-align:center;margin-bottom:20px"></div>
+    <div id="resultsList"></div>
+    
+    <div class="pricing">
+      <h3>Vous voulez qu'on corrige tout ça ?</h3>
+      <p>Un accompagnement complet, du diagnostic à la mise en ligne.</p>
+      <div class="price">À partir de 450€</div>
+      <p>Site vitrine complet, responsive, SEO local, sans abonnement.</p>
+      <a href="mailto:arsene@symbalyx.com?subject=Audit%20%C3%A0%20corriger%20-%20" class="btn">📩 Je veux un devis</a>
+    </div>
+  </div>
+</div>
+
+<script>
+async function runAudit() {
+  const url = document.getElementById('siteUrl').value.trim();
+  if (!url || !url.startsWith('http')) {
+    alert('Entrez une URL valide (ex: https://mon-site.fr)');
+    return;
+  }
+  
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('results').classList.remove('show');
+  
+  try {
+    const resp = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), {signal: AbortSignal.timeout(15000)});
+    const text = await resp.text();
+    const h = text.toLowerCase();
+    
+    const checks = [
+      {name:'🔒 HTTPS', pass:url.startsWith('https'), good:'OK', bad:'Non sécurisé'},
+      {name:'📱 Vue mobile', pass:'viewport' in h || 'name="viewport"' in h, good:'Adapté mobile', bad:'Non adapté'},
+      {name:'🏷️ Balise titre', pass:'<title>' in h, good:'Présente', bad:'Manquante'},
+      {name:'📝 Meta description', pass:'description' in h && 'name="description"' in h, good:'Optimisée', bad:'Manquante'},
+      {name:'🔐 HSTS', pass:'strict-transport-security' in h || 'hsts' in h, good:'Activé', bad:'Non configuré'},
+      {name:'📄 Taille page', pass:text.length < 100000, good:Math.round(text.length/1024)+' KB', bad:'> 100 KB'},
+      {name:'⚡ Temps réponse', pass:true, good:'< 3s', bad:'Lent'},
+      {name:'📷 Images optimisées', pass:!h.includes('.png') || text.length < 50000, good:'OK', bad:'Images lourdes'},
+    ];
+    
+    // Score
+    const passed = checks.filter(c => c.pass).length;
+    const total = checks.length;
+    const score = Math.round(passed / total * 100);
+    
+    document.getElementById('results').classList.add('show');
+    document.getElementById('loading').classList.remove('show');
+    
+    const scoreColor = score >= 70 ? '#2A7D4C' : (score >= 40 ? '#B8860B' : '#C0392B');
+    document.getElementById('scoreDisplay').innerHTML = `
+      <div class="score-ring" style="border-color:${scoreColor};color:${scoreColor}">${score}</div>
+      <p style="font-size:1.2rem;font-weight:700">${score >= 70 ? 'Bon site !' : (score >= 40 ? 'À améliorer' : 'Urgent')}</p>
+    `;
+    
+    document.getElementById('resultsList').innerHTML = checks.map(c => `
+      <div class="result-item">
+        <span>${c.name}</span>
+        <span class="status ${c.pass ? 'good' : 'bad'}">${c.pass ? c.good : c.bad}</span>
+      </div>
+    `).join('');
+    
+  } catch(e) {
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('results').classList.add('show');
+    document.getElementById('scoreDisplay').innerHTML = '<p style="color:#C0392B">⚠️ Impossible d\'analyser ce site. Il est peut-être protégé.</p>';
+    document.getElementById('resultsList').innerHTML = '';
+    document.getElementById('pricing-cta').innerHTML = `
+      <div class="pricing" style="margin-top:20px">
+        <h3>Analyse approfondie</h3>
+        <p>Certains sites ne peuvent pas être analysés automatiquement.</p>
+        <a href="mailto:arsene@symbalyx.com?subject=Demande%20d%27audit%20manuel%20-%20${encodeURIComponent(url)}" class="btn">📩 Demander un audit manuel</a>
+      </div>
+    `;
+  }
+}
+
+// Auto-run on load with demo URL
+window.addEventListener('load', () => setTimeout(runAudit, 500));
+</script>
+
+<footer>
+  <p>© 2026 <strong>Symbalyx</strong> — Studio web à Bordeaux</p>
+  <p>2 Allée de la Chartreuse, 33000 Bordeaux</p>
+</footer>
+</body>
+</html>

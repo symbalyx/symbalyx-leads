@@ -1,132 +1,315 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Problème sécurité détecté — Correction 99€</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Gratuit — Symbalyx</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#F7F3EE;color:#211A17;padding:16px;max-width:500px;margin:0 auto}
-.alert{background:#f8d7da;color:#721c24;padding:16px;border-radius:16px;margin-bottom:16px;font-weight:700;font-size:1.1rem;text-align:center}
-.card{background:#FFFDF8;border:1px solid rgba(33,26,23,.07);border-radius:16px;padding:20px;margin-bottom:12px}
-h1{font-size:1.3rem;margin-bottom:8px}
-h2{font-size:1.1rem;margin-bottom:8px}
-.finding{padding:10px;margin:6px 0;border-radius:10px;font-size:.9rem}
-.finding.critical{background:#f8d7da;color:#721c24}
-.finding.high{background:#fff3cd;color:#856404}
-.finding.medium{background:#d1ecf1;color:#0c5460}
-.price{font-size:2.5rem;font-weight:800;color:#2E1219;text-align:center;padding:12px}
-.price small{font-size:.9rem;font-weight:400;color:#756A62}
-.btn{display:block;padding:16px;background:#2E1219;color:#FFFDF8;border:none;border-radius:14px;font-size:1.1rem;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;margin:12px 0}
-.btn:hover{background:#43212A}
-.btn.secondary{background:#FFFDF8;color:#2E1219;border:2px solid #2E1219}
-.steps{padding:0;list-style:none}
-.steps li{padding:10px 0;border-bottom:1px solid rgba(33,26,23,.07);font-size:.9rem;display:flex;gap:10px;align-items:flex-start}
-.steps li:last-child{border:0}
-.step-num{background:#2E1219;color:#FFFDF8;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;margin-top:2px}
-.tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.7rem;font-weight:600}
-.tag.danger{background:#f8d7da;color:#721c24}
-.tag.warning{background:#fff3cd;color:#856404}
-.tag.success{background:#d4edda;color:#155724}
-.url-box{font-family:monospace;font-size:.8rem;background:#F7F3EE;padding:8px 12px;border-radius:8px;word-break:break-all;margin:8px 0}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
+  
+  h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .sub { font-size: 13px; color: #666; margin-bottom: 24px; }
+
+  .diagnostic { background: #13131a; border-radius: 16px; margin-bottom: 16px; border: 1px solid #1e1e2a; overflow: hidden; }
+  .diagnostic-header { padding: 16px; background: linear-gradient(135deg, #1a1a28, #13131a); border-bottom: 1px solid #1e1e2a; }
+  .diagnostic-header h2 { font-size: 16px; color: #fff; margin-bottom: 4px; }
+  .diagnostic-header .url { font-size: 12px; color: #ff6b35; word-break: break-all; }
+  
+  .issue { padding: 14px 16px; border-bottom: 1px solid #0f0f18; display: flex; gap: 12px; align-items: flex-start; }
+  .issue:last-child { border-bottom: none; }
+  .issue .severity { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .issue .severity.high { background: #ff174433; }
+  .issue .severity.medium { background: #ff910033; }
+  .issue .severity.low { background: #00c85333; }
+  .issue .content { flex: 1; min-width: 0; }
+  .issue .content h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .issue .content p { font-size: 12px; color: #888; line-height: 1.4; }
+  .issue .fix-btn { display: inline-block; margin-top: 6px; padding: 6px 14px; background: #ff6b35; color: #000; border: none; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; text-decoration: none; }
+  .issue .fix-btn:active { transform: scale(0.97); }
+
+  .score-ring { display: flex; align-items: center; gap: 16px; padding: 16px; background: #0d0d14; }
+  .score-ring .circle { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+  .score-ring .circle.low { background: #ff174466; color: #ff1744; }
+  .score-ring .circle.medium { background: #ff910066; color: #ff9100; }
+  .score-ring .circle.high { background: #00c85366; color: #00c853; }
+  .score-ring .info { flex: 1; }
+  .score-ring .info .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+  .score-ring .info .val { font-size: 14px; color: #bbb; margin-top: 2px; }
+
+  .cta-card { background: linear-gradient(135deg, #ff6b35, #e85d2a); border-radius: 16px; padding: 24px; text-align: center; margin-top: 16px; }
+  .cta-card h2 { font-size: 20px; color: #000; margin-bottom: 8px; }
+  .cta-card p { font-size: 13px; color: rgba(0,0,0,0.7); margin-bottom: 16px; line-height: 1.5; }
+  .cta-card .price { font-size: 32px; font-weight: 800; color: #000; margin-bottom: 4px; }
+  .cta-card .price-sub { font-size: 13px; color: rgba(0,0,0,0.6); margin-bottom: 16px; }
+  .cta-card .btn { display: block; padding: 14px; background: #000; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; }
+
+  .back-link { display: block; text-align: center; margin-top: 20px; color: #555; text-decoration: none; font-size: 13px; }
+
+  @media (prefers-color-scheme: light) {
+    body { background: #f5f5f0; color: #222; }
+    h1 { color: #000; }
+    .diagnostic { background: #fff; border-color: #e0ddd5; }
+    .diagnostic-header { background: linear-gradient(135deg, #f0ede8, #fff); border-color: #e0ddd5; }
+    .diagnostic-header h2 { color: #000; }
+    .issue { border-color: #f0ede8; }
+    .issue .content h3 { color: #000; }
+    .score-ring { background: #faf8f4; }
+  }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<div id="app"></div>
+<div id="prospect-view">
+  <h1>🔍 Diagnostic Gratuit</h1>
+  <div class="sub">Analyse automatique de votre site web</div>
+  <div id="diagnostic-content"></div>
+</div>
+
+<div id="all-prospects" style="display:none">
+  <h1>📋 Tous les diagnostics</h1>
+  <div class="sub">Sélectionnez un prospect</div>
+  <div id="prospect-list"></div>
+</div>
 
 <script>
-// Prospect data from the system
-const PROSPECTS = [
-  {id:"elite-sport", name:"Elite Sport", url:"https://www.elitesport.fr", phone:"09 40.97-16.97", email:"contact@elitesport.fr",
-   findings:[
-     {severity:"critical", text:"Identifiants administrateur WordPress visibles (WP Users API exposée)"},
-     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP (peut révéler mots de passe)"},
-     {severity:"high", text:"Version WordPress exposée (facilite le ciblage par les hackers)"},
-     {severity:"high", text:"XML-RPC activé (permet les attaques par force brute)"}
-   ], ads:["Google Analytics","GTM"], score:110},
-  {id:"pied-terre", name:"Le Pied à Terre", url:"https://lepiedaterre-cave.com", phone:"08 34 96 08 30", email:"contact@lepiedaterre-cave.fr",
-   findings:[
-     {severity:"critical", text:"Identifiants administrateur WordPress visibles (WP Users API exposée)"},
-     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP"},
-     {severity:"high", text:"Version WordPress exposée"},
-     {severity:"high", text:"XML-RPC activé (brute-force possible)"}
-   ], ads:["Google Analytics","GTM"], score:110},
-  {id:"pignol", name:"Pignol", url:"https://www.pignol.fr", phone:"05 51 45 31 94", email:"info@pignol.fr",
-   findings:[
-     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
-     {severity:"critical", text:"Fichier debug.log public contenant des erreurs PHP"},
-     {severity:"high", text:"Version WordPress exposée"},
-     {severity:"high", text:"XML-RPC activé"}
-   ], ads:["Google Analytics"], score:90},
-  {id:"les-filles", name:"Les Filles Les Fleurs", url:"https://lesfilleslesfleurs.com", phone:"01 32 12 38 53", email:"lesfilleslesfleurs@gmail.com",
-   findings:[
-     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
-     {severity:"high", text:"Fichier debug.log public"},
-     {severity:"high", text:"Version WordPress exposée"}
-   ], ads:["Google Analytics","GTM","Mailchimp"], score:95},
-  {id:"mariage-fleurs", name:"Mariage de Fleurs", url:"https://mariagedefleurs.fr", phone:"07 90 14 99 37", email:"mariagedefleurs@gmail.com",
-   findings:[
-     {severity:"critical", text:"Identifiants administrateur WordPress visibles"},
-     {severity:"high", text:"Fichier debug.log public"},
-     {severity:"high", text:"Version WordPress exposée"}
-   ], ads:["GTM","LinkedIn Ads"], score:95},
-  {id:"bordeaux-wines", name:"Bordeaux Wines", url:"https://www.bordeauxwine.fr", phone:"07 28.60-21 15", email:"johnmitra@bordeauxwine.fr",
-   findings:[
-     {severity:"high", text:"Fichier debug.log public contenant des erreurs PHP"},
-     {severity:"high", text:"Version WordPress exposée"},
-     {severity:"high", text:"XML-RPC activé"}
-   ], ads:["Google Analytics","GTM","Mailchimp"], score:95}
-];
+const DIAGNOSTICS = {
+  "lilleplombier": {
+    name: "Lilleplombier",
+    url: "lilleplombier.fr",
+    score: 26.5,
+    issues: [
+      { severity: "high", title: "❌ Pas optimisé mobile", detail: "Le site n'est pas responsive. Sur téléphone, les boutons sont illisibles et les textes débordent. Vous perdez 70% de vos visiteurs.", fix: "Correctif Express 99€" },
+      { severity: "high", title: "❌ Temps de charge > 5s", detail: "Les images ne sont pas compressées. Le site met plus de 5 secondes à charger — au-delà, 53% des visiteurs partent.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de formulaire de contact", detail: "Aucun moyen pour un client de vous contacter directement depuis le site. Ils doivent chercher votre téléphone ailleurs.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "studio-gymbox": {
+    name: "Studio Gymbox",
+    url: "studio-gymbox.fr",
+    score: 32.5,
+    issues: [
+      { severity: "high", title: "❌ Pages trop lourdes", detail: "Vos pages dépassent 3 Mo. Les images non optimisées font fuir les visiteurs avant qu'ils voient vos offres.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de meta description", detail: "Google affiche un texte aléatoire dans les résultats de recherche. Une bonne description augmenterait votre taux de clic de 30%.", fix: "Audit SEO 29€" },
+      { severity: "low", title: "📱 Design vieillissant", detail: "Le design semble dater. Un rafraîchissement visuel augmenterait la confiance des visiteurs.", fix: "Site Starter 450€" }
+    ]
+  },
+  "lesfilleslesfleurs": {
+    name: "Les Filles Les Fleurs",
+    url: "lesfilleslesfleurs.com",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Formulaire inaccessible sur mobile", detail: "Votre formulaire de contact ne répond pas au clic sur smartphone. Impossible de commander depuis un téléphone.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de HTTPS valide", detail: "Certaines ressources sont chargées en HTTP. Les navigateurs peuvent afficher 'Non sécurisé'.", fix: "Correctif Express 99€" },
+      { severity: "low", title: "💡 Pas de galerie commande en ligne", detail: "Vous pourriez prendre des commandes de bouquets directement sur le site. 24h de devis.", fix: "Contactez-nous" }
+    ]
+  },
+  "mariagedefleurs": {
+    name: "Mariage de Fleurs",
+    url: "mariagedefleurs.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Données formulaire en clair", detail: "Les informations envoyées via votre formulaire ne sont pas chiffrées. Risque de fuite de données clients.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ SSL mal configuré", detail: "Votre certificat SSL a des problèmes de chaîne de confiance. Certains navigateurs bloquent l'accès.", fix: "Correctif Express 99€" },
+      { severity: "low", title: "💡 Pas de portfolio réalisations", detail: "Aucune photo de vos mariages visibles. C'est ce qui fait la différence pour vos prospects.", fix: "Pack Présence 149€" }
+    ]
+  },
+  "sculpt-bordeaux": {
+    name: "Sculpt Bordeaux",
+    url: "sculpt-bordeaux.com",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Invisible sur Google local", detail: "Votre site n'est pas indexé correctement pour les recherches locales. 'Sculpteur Bordeaux' ne remonte pas.", fix: "Pack Présence Locale 149€" },
+      { severity: "medium", title: "⚠️ Pas de schema.org", detail: "Google ne comprend pas que vous êtes un sculpteur à Bordeaux. Les rich snippets sont absents.", fix: "Audit SEO 29€" },
+      { severity: "low", title: "📱 Pas de galerie photos", detail: "Votre travail mérite d'être vu. Pas de portfolio, pas de confiance.", fix: "Site Starter 450€" }
+    ]
+  },
+  "marierouxeau": {
+    name: "Marie Rouxeau",
+    url: "marierouxeau.com",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Portfolio non responsive", detail: "Vos projets d'architecture ne s'affichent pas correctement sur mobile. 80% de vos clients vous découvrent sur smartphone.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Images non optimisées", detail: "Photos de projets trop lourdes — le site rame sur mobile. Expérience utilisateur dégradée.", fix: "Correctif Express 99€" },
+      { severity: "low", title: "💡 Pas de CTA clair", detail: "Aucun bouton 'Me contacter' ou 'Demander un devis' visible. Les visiteurs ne savent pas quoi faire.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "bo-m": {
+    name: "BÔ M. Architecte",
+    url: "bo-m.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ 8 secondes de chargement", detail: "Les photos haute résolution ne sont pas optimisées pour le web. Vous perdez des clients architectes avant même qu'ils voient votre travail.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de SEO local", detail: "Votre fiche Google My Business n'est pas liée au site. Les recherches d'architectes à Bordeaux vous ignorent.", fix: "Pack Présence Locale 149€" },
+      { severity: "low", title: "📱 Menu mobile cassé", detail: "Le menu de navigation ne fonctionne pas correctement sur téléphone. Impossible d'accéder aux pages.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "architectebordeaux": {
+    name: "Hoerner Ordonneau",
+    url: "architectebordeaux.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ SSL invalide — 'Non sécurisé'", detail: "Chrome affiche clairement 'Non sécurisé' dans la barre d'adresse. C'est rédhibitoire pour 85% des visiteurs.", fix: "Correctif Express 99€" },
+      { severity: "high", title: "❌ Contenu mixte (HTTP + HTTPS)", detail: "Des ressources sont chargées en HTTP sur une page HTTPS. Le cadenas vert ne s'affiche pas.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de certificat valide", detail: "Le certificat SSL est soit expiré soit mal installé. Correction en 30 minutes.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "coach33": {
+    name: "Coach33",
+    url: "coach33.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Pas de réservation en ligne", detail: "Vos clients doivent vous appeler ou vous envoyer un email pour réserver. Un calendrier automatique augmenterait vos conversions.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de témoignages visibles", detail: "Aucune preuve sociale. Les clients veulent voir que vous avez déjà aidé d'autres personnes.", fix: "Pack Présence 149€" },
+      { severity: "low", title: "📱 Design daté", detail: "Le site fait 'amateur'. Pour un coach, la crédibilité est tout.", fix: "Site Starter 450€" }
+    ]
+  }
+};
 
-// Get prospect from URL hash
-const hash = window.location.hash.slice(1) || "elite-sport";
-const p = PROSPECTS.find(x => x.id === hash) || PROSPECTS[0];
+// Also generate shorter versions for remaining prospects
+const REMAINING_DIAGNOSTICS = {
+  "coach-sport-bordeaux": {
+    name: "Rémi Junk Coaching",
+    url: "coach-sport-bordeaux.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ CTA noyé dans le texte", detail: "Votre appel à l'action est perdu au milieu du contenu. Personne ne clique. Taux de conversion proche de zéro.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de preuve sociale", detail: "Aucun témoignage client visible. Pour un coaching, c'est rédhibitoire.", fix: "Pack Présence 149€" }
+    ]
+  },
+  "elitesport": {
+    name: "Elite Sport",
+    url: "elitesport.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Pas de HTTPS", detail: "Votre site n'est pas en HTTPS. Google le pénalise lourdement et les visiteurs voient un avertissement de sécurité.", fix: "Correctif Express 99€" },
+      { severity: "high", title: "❌ Données non sécurisées", detail: "Les formulaires envoient les données en clair. Risque RGPD et fuite de données.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "belle-au-naturel": {
+    name: "Institut Belle au Naturel",
+    url: "belle-au-naturel.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Version de test en ligne", detail: "Votre site est sur un sous-domaine 'test'. Pas de version publique professionnelle visible.", fix: "Site Starter 450€" },
+      { severity: "medium", title: "⚠️ Pas de prise de RDV", detail: "Pas de système de réservation en ligne pour vos soins. Vous perdez des clientes.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "institut-naturali-bordeaux": {
+    name: "Institut Naturali Bordeaux",
+    url: "institut-naturali-bordeaux.com",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Pas lié à Google My Business", detail: "Votre site n'est pas connecté à votre fiche Google. Vous êtes invisible sur les recherches locales d'instituts à Bordeaux.", fix: "Pack Présence Locale 149€" },
+      { severity: "medium", title: "⚠️ Pas de SEO local", detail: "Aucune balise géographique. Google ne sait pas que vous êtes à Bordeaux.", fix: "Audit SEO 29€" }
+    ]
+  },
+  "lepiedaterre-cave": {
+    name: "Le Pied à Terre",
+    url: "lepiedaterre-cave.com",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Pas de e-commerce", detail: "Vous vendez du vin mais pas de boutique en ligne. Vous perdez toutes les ventes des clients qui ne peuvent pas se déplacer.", fix: "Site Starter 450€" },
+      { severity: "medium", title: "⚠️ Pas de newsletter", detail: "Aucun système pour capturer les emails de vos visiteurs et les fidéliser.", fix: "Correctif Express 99€" }
+    ]
+  },
+  "ef-coaching-toulouse": {
+    name: "Ef Coaching Toulouse",
+    url: "ef-coaching-toulouse.fr",
+    score: 50,
+    issues: [
+      { severity: "high", title: "❌ Pas de témoignages", detail: "Zéro preuve sociale. Pour un coaching, c'est ce qui fait la différence entre un prospect qui appelle et un qui passe.", fix: "Correctif Express 99€" },
+      { severity: "medium", title: "⚠️ Pas de SEO local Toulouse", detail: "Vous êtes à Toulouse mais votre site n'est pas optimisé pour les recherches toulousaines.", fix: "Pack Présence Locale 149€" }
+    ]
+  }
+};
 
-const severityLabel = {critical:"🔴 Critique", high:"🟡 Élevée", medium:"🔵 Moyenne"};
-const severityClass = {critical:"critical", high:"high", medium:"medium"};
+Object.assign(DIAGNOSTICS, REMAINING_DIAGNOSTICS);
 
-const app = document.getElementById("app");
-app.innerHTML = `
-<div class="alert">🔴 3 à 4 failles de sécurité détectées sur ${p.name}</div>
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
 
-<div class="card">
-  <h2>📌 ${p.name}</h2>
-  <div class="url-box">${p.url}</div>
-  <p style="font-size:.85rem;color:#756A62">📞 ${p.phone} · 📧 ${p.email}</p>
-  ${p.ads.length ? `<p style="font-size:.8rem;color:#856404;margin-top:6px">💰 Budget pub: ${p.ads.join(" · ")}</p>` : ""}
-</div>
+function renderProspect(key) {
+  const data = DIAGNOSTICS[key];
+  if (!data) { showList(); return; }
 
-<div class="card">
-  <h2>🔴 Failles de sécurité trouvées</h2>
-  ${p.findings.map(f => `
-    <div class="finding ${severityClass[f.severity]}">
-      ${severityLabel[f.severity]}:<br>${f.text}
+  document.getElementById('all-prospects').style.display = 'none';
+  document.getElementById('prospect-view').style.display = 'block';
+
+  let html = `<div class="diagnostic">
+    <div class="diagnostic-header">
+      <h2>${data.name}</h2>
+      <div class="url">${data.url}</div>
     </div>
-  `).join("")}
-</div>
+    <div class="score-ring">
+      <div class="circle ${data.score < 30 ? 'low' : data.score < 40 ? 'medium' : 'high'}">${data.score}</div>
+      <div class="info">
+        <div class="label">Score de santé</div>
+        <div class="val">${data.score < 30 ? '🔴 Critique — action urgente' : data.score < 40 ? '🟡 Attention — à corriger' : '🟢 Passable — peut mieux faire'}</div>
+      </div>
+    </div>`;
 
-<div class="card" style="background:linear-gradient(135deg,#FFFDF8,#F0E3D2)">
-  <div class="price">99€ <small>TTC</small></div>
-  <p style="text-align:center;color:#756A62;font-size:.9rem">Pack Sécurité Express — Correction complète en 30 min</p>
-  <a href="mailto:arsene@symbalyx.com?subject=Sécurité%20${encodeURIComponent(p.name)}&body=Bonjour%20Arsène%2C%0A%0AJ'ai%20vu%20les%20failles%20sur%20mon%20site.%20Je%20suis%20intéressé%20par%20le%20Pack%20Sécurité%20à%2099€.%0A%0AMon%20site%20:${encodeURIComponent(p.url)}%0A%0AMon%20téléphone%20:" class="btn">📩 Oui, je veux sécuriser mon site</a>
-  <a href="mailto:arsene@symbalyx.com?subject=Info%20${encodeURIComponent(p.name)}" class="btn secondary">❓ J'ai des questions</a>
-</div>
+  data.issues.forEach(issue => {
+    html += `<div class="issue">
+      <div class="severity ${issue.severity}">
+        ${issue.severity === 'high' ? '🚨' : issue.severity === 'medium' ? '⚠️' : '💡'}
+      </div>
+      <div class="content">
+        <h3>${issue.title}</h3>
+        <p>${issue.detail}</p>
+        <a class="fix-btn" href="services.html">🔧 ${issue.fix}</a>
+      </div>
+    </div>`;
+  });
 
-<div class="card">
-  <h2>📋 Comment ça marche</h2>
-  <ol class="steps">
-    <li><span class="step-num">1</span> <strong>15 min d'appel</strong> — Je vous montre les failles sur votre site en direct</li>
-    <li><span class="step-num">2</span> <strong>30 min de correctif</strong> — Je sécurise tout (users, logs, version, XML-RPC)</li>
-    <li><span class="step-num">3</span> <strong>Rapport fourni</strong> — Vous avez la preuve que tout est corrigé</li>
-  </ol>
-</div>
+  html += `</div>
+    <div class="cta-card">
+      <div class="price">99€</div>
+      <div class="price-sub">Correctif Express — réparé en 24h</div>
+      <p>Je corrige les problèmes critiques de votre site aujourd'hui. Résultat garanti ou remboursé.</p>
+      <a class="btn" href="mailto:arsene@symbalyx.com?subject=Correctif%20Express%20-%20${encodeURIComponent(data.name)}">📧 Commander le correctif</a>
+    </div>`;
 
-<div style="text-align:center;color:#756A62;padding:16px;font-size:.85rem">
-  <p>Arsène — Symbalyx, studio web Bordeaux</p>
-  <p style="margin-top:4px">arsene@symbalyx.com · https://symbalyx.com</p>
-</div>
-`;
+  document.getElementById('diagnostic-content').innerHTML = html;
+}
+
+function showList() {
+  document.getElementById('all-prospects').style.display = 'block';
+  document.getElementById('prospect-view').style.display = 'none';
+
+  let html = '';
+  Object.entries(DIAGNOSTICS).forEach(([key, data]) => {
+    const scoreClass = data.score < 30 ? 'low' : data.score < 40 ? 'medium' : 'high';
+    html += `<div class="diagnostic" style="cursor:pointer" onclick="renderProspect('${key}')">
+      <div class="diagnostic-header">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h2>${data.name}</h2>
+          <div class="circle ${scoreClass}" style="width:40px;height:40px;font-size:14px">${data.score}</div>
+        </div>
+        <div class="url">${data.url}</div>
+      </div>
+      <div style="padding:12px 16px;font-size:12px;color:#666">
+        ${data.issues.length} problèmes détectés · Cliquez pour voir
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('prospect-list').innerHTML = html;
+}
+
+// On load, check for ?prospect= param
+const prospectParam = getQueryParam('prospect') || getQueryParam('p');
+if (prospectParam && DIAGNOSTICS[prospectParam]) {
+  renderProspect(prospectParam);
+} else {
+  showList();
+}
 </script>
+<a class="back-link" href="services.html">← Voir tous les services</a>
+</div>
 </body>
 </html>

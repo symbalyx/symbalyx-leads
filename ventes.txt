@@ -1,0 +1,10 @@
+#1 | 110pts | Elite Sport  une piste po                | 09 40.97-16.97       | 🔴 URGENT: Sécurité critique - appelez immédiatemen
+#2 | 110pts | Le Pied à Terre  une pist                | 0834960830           | 🔴 URGENT: Sécurité critique - appelez immédiatemen
+#3 |  95pts | Les Filles Les Fleurs  un                | 0132123853           | 🟡 Failles multiples + budget pub = vente facile
+#4 |  95pts | Mariage de Fleurs  une pi                | 0790149937           | 🟡 Failles multiples + budget pub = vente facile
+#5 |  95pts | Bordeaux Wines  une piste                | 07 28.6021 15        | 🟡 Failles multiples + budget pub = vente facile
+#6 |  90pts | Pignol  une piste pour vo                | 0551453194           | 🔴 URGENT: Sécurité critique - appelez immédiatemen
+#7 |  85pts | Hoerner Ordonneau Archite                | 0335567900           | 🟡 Failles multiples + budget pub = vente facile
+#8 |  80pts | Bordeaux Photographie  un                | 0117920670           | 💰 Budget pub + faille WP = client idéal
+#9 |  80pts | Goûtu par Oven Heaven  un                | 0683899783           | 💰 Budget pub + faille WP = client idéal
+#10 |  80pts | MvSport  une piste pour v                | 0621721205           | 💰 Budget pub + faille WP = client idéal
